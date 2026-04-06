@@ -233,6 +233,31 @@
   color: #db2777;
 }
 
+/* クイズ スライドアニメーション */
+.quiz-slide-enter {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.quiz-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ナビちゃんふわふわアニメーション */
 .navi-float {
   animation: navi-float 3s ease-in-out infinite;
