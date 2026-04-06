@@ -44,7 +44,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
           <p className="text-lg font-bold text-pink-700">{result.name}</p>
         </div>
 
-        {/* ナビちゃん + 性格解説 */}
+        {/* ナビちゃん + 性格解説（途中まで→LINE誘導） */}
         <div className="mb-6 rounded-2xl border border-pink-100 bg-gradient-to-r from-pink-50 to-white p-4">
           <div className="mb-3 flex items-center gap-3">
             <NaviChan size="sm" />
@@ -52,9 +52,22 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
               ナビちゃんの解説
             </span>
           </div>
-          <p className="text-sm leading-relaxed text-pink-900/70">
-            {result.description}
-          </p>
+          <div className="relative">
+            <p className="text-sm leading-relaxed text-pink-900/70">
+              {result.description.slice(0, 40)}.....
+            </p>
+            <a
+              href={LINE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex items-center gap-1 text-sm font-bold text-[#06C755] hover:underline"
+            >
+              続きをLINEで見る
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
         </div>
 
         {/* おすすめ副業 = チャットレディ */}
