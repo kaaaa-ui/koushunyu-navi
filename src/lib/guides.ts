@@ -81,6 +81,23 @@ const PILLAR_META: Record<
 
 const PILLARS_DIR = path.join(process.cwd(), "src/content/pillars");
 
+// pillar_01-07: H1 + メタデータ行(「**カテゴリ**:」等) + 区切り「---」を除去し本文だけ返す
+function stripMetaBlock(raw: string): string {
+  const lines = raw.split("\n");
+  let i = 0;
+  // H1行をスキップ
+  if (lines[i]?.startsWith("# ")) i++;
+  // 空行スキップ
+  while (i < lines.length && lines[i].trim() === "") i++;
+  // **Key**: Value 行をスキップ
+  while (i < lines.length && /^\*\*[^*]+\*\*\s*:/.test(lines[i])) i++;
+  // 空行スキップ
+  while (i < lines.length && lines[i].trim() === "") i++;
+  // --- 区切りをスキップ
+  if (i < lines.length && lines[i].trim() === "---") i++;
+  return lines.slice(i).join("\n");
+}
+
 function estimateReadingTime(text: string): number {
   const charCount = text.replace(/\s/g, "").length;
   return Math.max(1, Math.ceil(charCount / 600));
@@ -116,7 +133,8 @@ function parseGuideFile(filename: string): Guide {
     };
   }
 
-  // frontmatter無しの場合（pillar_01-07）
+  // frontmatter無しの場合（pillar_01-07）- メタデータブロック除去
+  const cleanContent = stripMetaBlock(content);
   const meta = PILLAR_META[filename];
   if (!meta) {
     const slug = filename.replace(/\.md$/, "").replace(/^pillar_\d+_/, "");
@@ -127,10 +145,10 @@ function parseGuideFile(filename: string): Guide {
       category: "general",
       publishedAt: "2026-04-05",
       updatedAt: "2026-04-05",
-      readingTime: estimateReadingTime(content),
-      wordCount: estimateWordCount(content),
+      readingTime: estimateReadingTime(cleanContent),
+      wordCount: estimateWordCount(cleanContent),
       tags: [],
-      content,
+      content: cleanContent,
     };
   }
 
@@ -138,9 +156,9 @@ function parseGuideFile(filename: string): Guide {
     ...meta,
     publishedAt: "2026-04-05",
     updatedAt: "2026-04-05",
-    readingTime: estimateReadingTime(content),
-    wordCount: estimateWordCount(content),
-    content,
+    readingTime: estimateReadingTime(cleanContent),
+    wordCount: estimateWordCount(cleanContent),
+    content: cleanContent,
   };
 }
 
