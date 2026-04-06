@@ -17,7 +17,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
   const resultUrl = `${SITE_URL}/result/${result.code}`;
 
   const shareTextForX = encodeURIComponent(
-    `私の副業MBTIタイプは【${result.code}】${result.name}でした！\nおすすめ副業: ${result.job}（月収${result.salary}）\n\n#副業MBTI診断 #高収入ナビ`
+    `私の副業MBTIタイプは【${result.code}】${result.name}でした！\nおすすめ副業: ${result.job}（月収${result.salary}円）\n\n#副業MBTI診断 #高収入ナビ`
   );
   const xShareUrl = `https://twitter.com/intent/tweet?text=${shareTextForX}&url=${encodeURIComponent(resultUrl)}`;
   const lineShareUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(resultUrl)}`;
@@ -44,7 +44,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
           <p className="text-lg font-bold text-pink-700">{result.name}</p>
         </div>
 
-        {/* ナビちゃん + 説明 */}
+        {/* ナビちゃん + 性格解説 */}
         <div className="mb-6 rounded-2xl border border-pink-100 bg-gradient-to-r from-pink-50 to-white p-4">
           <div className="mb-3 flex items-center gap-3">
             <NaviChan size="sm" />
@@ -57,10 +57,10 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
           </p>
         </div>
 
-        {/* おすすめ職種 */}
-        <div className="mb-6 rounded-2xl bg-gradient-to-br from-yellow-50 to-pink-50 p-4 border border-yellow-200/50">
+        {/* おすすめ副業 = チャットレディ */}
+        <div className="mb-4 rounded-2xl bg-gradient-to-br from-yellow-50 to-pink-50 p-4 border border-yellow-200/50">
           <h3 className="mb-2 text-center text-sm font-bold text-pink-600">
-            おすすめの副業
+            あなたにぴったりの副業
           </h3>
           <div className="text-center">
             <span className="text-xl font-bold text-pink-700">
@@ -69,6 +69,46 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
             <div className="mt-1 text-sm text-gold font-bold">
               月収 {result.salary}円
             </div>
+          </div>
+        </div>
+
+        {/* チャトレでの強み（チラ見せ） */}
+        <div className="mb-4 rounded-2xl border border-pink-200 bg-white p-4">
+          <h3 className="mb-2 text-sm font-bold text-pink-600">
+            {result.code}タイプのチャトレでの強み
+          </h3>
+          <p className="text-sm leading-relaxed text-pink-900/70">
+            {result.chatreStrength}
+          </p>
+        </div>
+
+        {/* 秘密の攻略法（ぼかし演出→LINE誘導） */}
+        <div className="mb-6 relative overflow-hidden rounded-2xl border-2 border-dashed border-pink-300 bg-gradient-to-b from-pink-50 to-white p-4">
+          <div className="mb-2 flex items-center gap-2">
+            <span className="text-lg">🔒</span>
+            <h3 className="text-sm font-bold text-pink-600">
+              あなた専用の稼ぎ方レシピ
+            </h3>
+          </div>
+          {/* チラ見せテキスト（ぼかし） */}
+          <div className="relative">
+            <p className="text-sm leading-relaxed text-pink-900/70">
+              {result.lineTeaser}
+            </p>
+            <div className="absolute inset-0 top-4 bg-gradient-to-b from-transparent via-white/80 to-white" />
+          </div>
+          <div className="relative mt-2 text-center">
+            <p className="text-xs text-pink-400 mb-3">
+              続きはLINEで無料公開中...
+            </p>
+            <a
+              href={LINE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#06C755] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-green-200 transition-all hover:scale-105 hover:shadow-xl"
+            >
+              LINEで続きを見る
+            </a>
           </div>
         </div>
 
@@ -119,15 +159,18 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
           </a>
         </div>
 
-        {/* CTA */}
+        {/* メインCTA */}
         <div className="space-y-3 border-t border-pink-100 pt-6">
           <a
             href={LINE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full rounded-full bg-[#06C755] px-6 py-4 text-center text-sm font-bold text-white shadow-lg shadow-green-200 transition-transform hover:scale-105"
+            className="block w-full rounded-full bg-[#06C755] px-6 py-4 text-center font-bold text-white shadow-lg shadow-green-200 transition-transform hover:scale-105"
           >
-            LINEで詳しく相談する
+            <span className="text-base">LINEで稼ぎ方を詳しく聞く</span>
+            <span className="mt-1 block text-xs font-normal opacity-80">
+              ナビちゃんが{result.code}タイプ専用のアドバイスをお届け
+            </span>
           </a>
           <a
             href={CHOUCHOU_URL}
