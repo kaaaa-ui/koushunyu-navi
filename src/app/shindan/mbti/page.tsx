@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 
 const LINE_URL = "https://line.me/R/ti/p/%40309gsalq";
+const MBTI_FORM_URL = "https://liff.line.me/2009687184-04t9NtU8?unique_key=ZfPS7t&ts=1775445422";
 
 export const metadata: Metadata = {
   title: "副業MBTI診断｜あなたに合う高収入のお仕事は？",
@@ -67,7 +68,7 @@ export default function MbtiPage() {
       {/* CTA */}
       <div className="mb-12 text-center">
         <Button asChild size="lg" className="bg-[#06C755] hover:bg-[#05b04c] text-white text-base px-8 py-6">
-          <a href={LINE_URL} target="_blank" rel="noopener noreferrer">
+          <a href={MBTI_FORM_URL} target="_blank" rel="noopener noreferrer">
             LINEで無料診断する
           </a>
         </Button>
@@ -106,7 +107,7 @@ export default function MbtiPage() {
           LINEで質問に答えるだけで、ナビちゃんが診断するよ
         </p>
         <Button asChild size="lg" className="bg-[#06C755] hover:bg-[#05b04c] text-white text-base px-8 py-6">
-          <a href={LINE_URL} target="_blank" rel="noopener noreferrer">
+          <a href={MBTI_FORM_URL} target="_blank" rel="noopener noreferrer">
             LINEで無料診断する
           </a>
         </Button>
