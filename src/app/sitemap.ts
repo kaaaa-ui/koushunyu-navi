@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAllGuides } from "@/lib/guides";
 import { getAllJobPages, getCategories } from "@/lib/jobs";
 
-const BASE_URL = "https://koushunyu-navi.com";
+const BASE_URL = "https://koushunyu-navi.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const guides = getAllGuides();

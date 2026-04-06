@@ -9,7 +9,7 @@ const MBTI_FORM_URL = "https://liff.line.me/2009687184-04t9NtU8?unique_key=ZfPS7
 export const metadata: Metadata = {
   title: "副業MBTI診断｜あなたに合う高収入のお仕事は？",
   description: "MBTIタイプ別であなたにぴったりの副業・夜職がわかる無料診断。16タイプ別のおすすめ職種をナビちゃんが解説。LINEで簡単30秒診断。",
-  alternates: { canonical: "https://koushunyu-navi.com/shindan/mbti" },
+  alternates: { canonical: "https://koushunyu-navi.vercel.app/shindan/mbti" },
 };
 
 const MBTI_TYPES = [

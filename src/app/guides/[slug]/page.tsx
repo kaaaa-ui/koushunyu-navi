@@ -29,7 +29,7 @@ export async function generateMetadata({
       tags: guide.tags,
     },
     alternates: {
-      canonical: `https://koushunyu-navi.com/guides/${guide.slug}`,
+      canonical: `https://koushunyu-navi.vercel.app/guides/${guide.slug}`,
     },
   };
 }
@@ -56,7 +56,7 @@ export default async function GuidePage({
     publisher: {
       "@type": "Organization",
       name: "高収入ナビ",
-      logo: { "@type": "ImageObject", url: "https://koushunyu-navi.com/logo.png" },
+      logo: { "@type": "ImageObject", url: "https://koushunyu-navi.vercel.app/logo.png" },
     },
   };
 
@@ -64,9 +64,9 @@ export default async function GuidePage({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Top", item: "https://koushunyu-navi.com/" },
-      { "@type": "ListItem", position: 2, name: "ガイド", item: "https://koushunyu-navi.com/guides/" },
-      { "@type": "ListItem", position: 3, name: guide.title, item: `https://koushunyu-navi.com/guides/${guide.slug}/` },
+      { "@type": "ListItem", position: 1, name: "Top", item: "https://koushunyu-navi.vercel.app/" },
+      { "@type": "ListItem", position: 2, name: "ガイド", item: "https://koushunyu-navi.vercel.app/guides/" },
+      { "@type": "ListItem", position: 3, name: guide.title, item: `https://koushunyu-navi.vercel.app/guides/${guide.slug}/` },
     ],
   };
 

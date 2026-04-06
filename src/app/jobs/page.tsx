@@ -10,7 +10,7 @@ const LINE_URL = "https://line.me/R/ti/p/%40309gsalq";
 export const metadata: Metadata = {
   title: "求人一覧｜職種×エリアで探す",
   description: "チャットレディ・キャバクラ・メンズエステなど、全国の高収入求人を職種×エリアで探せます。",
-  alternates: { canonical: "https://koushunyu-navi.com/jobs" },
+  alternates: { canonical: "https://koushunyu-navi.vercel.app/jobs" },
 };
 
 export default function JobsIndexPage() {

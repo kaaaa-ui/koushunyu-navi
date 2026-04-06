@@ -8,7 +8,7 @@ const LINE_URL = "https://line.me/R/ti/p/%40309gsalq";
 export const metadata: Metadata = {
   title: "LINE無料相談｜ナビちゃんに相談してみよう",
   description: "高収入ナビのLINE公式アカウントで、お仕事の相談ができます。MBTI診断・条件診断・求人紹介まで、ナビちゃんが優しくサポート。",
-  alternates: { canonical: "https://koushunyu-navi.com/line" },
+  alternates: { canonical: "https://koushunyu-navi.vercel.app/line" },
 };
 
 export default function LinePage() {

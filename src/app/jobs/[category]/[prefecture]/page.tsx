@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   return {
     title: job.title,
     description: job.description,
-    alternates: { canonical: `https://koushunyu-navi.com/jobs/${category}/${prefecture}` },
+    alternates: { canonical: `https://koushunyu-navi.vercel.app/jobs/${category}/${prefecture}` },
   };
 }
 
@@ -37,7 +37,7 @@ export default async function JobPrefecturePage({ params }: { params: Promise<{ 
     "@context": "https://schema.org", "@type": "JobPosting",
     title: `${prefLabel}の${catLabel}`, description: job.description, datePosted: "2026-04-06",
     employmentType: "PART_TIME",
-    hiringOrganization: { "@type": "Organization", name: "高収入ナビ", sameAs: "https://koushunyu-navi.com" },
+    hiringOrganization: { "@type": "Organization", name: "高収入ナビ", sameAs: "https://koushunyu-navi.vercel.app" },
     jobLocation: { "@type": "Place", address: { "@type": "PostalAddress", addressRegion: prefLabel, addressCountry: "JP" } },
   };
 
@@ -52,10 +52,10 @@ export default async function JobPrefecturePage({ params }: { params: Promise<{ 
   const breadcrumbLd = {
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Top", item: "https://koushunyu-navi.com/" },
-      { "@type": "ListItem", position: 2, name: "求人一覧", item: "https://koushunyu-navi.com/jobs/" },
-      { "@type": "ListItem", position: 3, name: catLabel, item: `https://koushunyu-navi.com/jobs/${category}/` },
-      { "@type": "ListItem", position: 4, name: prefLabel, item: `https://koushunyu-navi.com/jobs/${category}/${prefecture}/` },
+      { "@type": "ListItem", position: 1, name: "Top", item: "https://koushunyu-navi.vercel.app/" },
+      { "@type": "ListItem", position: 2, name: "求人一覧", item: "https://koushunyu-navi.vercel.app/jobs/" },
+      { "@type": "ListItem", position: 3, name: catLabel, item: `https://koushunyu-navi.vercel.app/jobs/${category}/` },
+      { "@type": "ListItem", position: 4, name: prefLabel, item: `https://koushunyu-navi.vercel.app/jobs/${category}/${prefecture}/` },
     ],
   };
 

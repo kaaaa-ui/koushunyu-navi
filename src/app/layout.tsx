@@ -22,7 +22,7 @@ const zenKaku = Zen_Kaku_Gothic_New({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://koushunyu-navi.com"),
+  metadataBase: new URL("https://koushunyu-navi.vercel.app"),
   title: {
     default: "高収入ナビ｜副業MAP - 女性の高収入副業・夜職を優しくナビゲート",
     template: "%s - 高収入ナビ",

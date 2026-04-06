@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   return {
     title: `${label}の求人｜エリアで探す`,
     description: `${label}の求人をエリア別に探せます。未経験OK・高時給のお仕事をナビちゃんが紹介。`,
-    alternates: { canonical: `https://koushunyu-navi.com/jobs/${category}` },
+    alternates: { canonical: `https://koushunyu-navi.vercel.app/jobs/${category}` },
   };
 }
 
@@ -32,9 +32,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Top", item: "https://koushunyu-navi.com/" },
-      { "@type": "ListItem", position: 2, name: "求人一覧", item: "https://koushunyu-navi.com/jobs/" },
-      { "@type": "ListItem", position: 3, name: label, item: `https://koushunyu-navi.com/jobs/${category}/` },
+      { "@type": "ListItem", position: 1, name: "Top", item: "https://koushunyu-navi.vercel.app/" },
+      { "@type": "ListItem", position: 2, name: "求人一覧", item: "https://koushunyu-navi.vercel.app/jobs/" },
+      { "@type": "ListItem", position: 3, name: label, item: `https://koushunyu-navi.vercel.app/jobs/${category}/` },
     ],
   };
 
