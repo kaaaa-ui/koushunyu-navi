@@ -6,9 +6,14 @@ import type { MbtiType } from "@/lib/mbti-data";
 import { mbtiTypes } from "@/lib/mbti-data";
 import { gtagEvent } from "@/lib/gtag";
 
-const LINE_URL = "https://line.me/R/ti/p/%40309gsalq";
+const LINE_ADD_URL = "https://line.me/R/ti/p/%40309gsalq";
 const CHOUCHOU_URL = "https://chouchou-live.com/";
 const SITE_URL = "https://fukugyo-mbti.vercel.app";
+
+/** タイプコードを自動入力してLINEチャットを開くURL */
+function getLineMessageUrl(typeCode: string) {
+  return `https://line.me/R/oaMessage/%40309gsalq/?${encodeURIComponent(typeCode)}`;
+}
 
 interface QuizResultProps {
   result: MbtiType;
@@ -75,7 +80,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
               {result.description.slice(0, 40)}.....
             </p>
             <a
-              href={LINE_URL}
+              href={getLineMessageUrl(result.code)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackClick("line_click", "navi_description")}
@@ -134,7 +139,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
               続きはLINEで無料公開中...
             </p>
             <a
-              href={LINE_URL}
+              href={getLineMessageUrl(result.code)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackClick("line_click", "recipe_teaser")}
@@ -197,7 +202,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
         {/* メインCTA */}
         <div className="space-y-3 border-t border-pink-100 pt-6">
           <a
-            href={LINE_URL}
+            href={getLineMessageUrl(result.code)}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackClick("line_click", "main_cta")}
