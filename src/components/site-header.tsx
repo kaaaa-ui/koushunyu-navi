@@ -13,14 +13,11 @@ export function SiteHeader() {
           <Link href="/jobs" className="text-gray-700 hover:text-pink-600">
             お仕事を探す
           </Link>
-          <Link href="/shindan" className="text-gray-700 hover:text-pink-600">
+          <Link href="/shindan/mbti" className="text-gray-700 hover:text-pink-600">
             診断
           </Link>
           <Link href="/guides" className="text-gray-700 hover:text-pink-600">
             ガイド
-          </Link>
-          <Link href="/column" className="text-gray-700 hover:text-pink-600">
-            コラム
           </Link>
         </nav>
         <Button asChild size="sm" className="bg-pink-500 hover:bg-pink-600">

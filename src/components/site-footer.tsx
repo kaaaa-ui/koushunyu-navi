@@ -1,8 +1,11 @@
 import Link from "next/link";
 
 const PREFECTURES = [
-  "北海道", "東京都", "神奈川県", "千葉県", "埼玉県",
-  "愛知県", "大阪府", "京都府", "兵庫県", "福岡県",
+  { name: "東京都", slug: "tokyo" },
+  { name: "大阪府", slug: "osaka" },
+  { name: "愛知県", slug: "aichi" },
+  { name: "福岡県", slug: "fukuoka" },
+  { name: "北海道", slug: "hokkaido" },
 ];
 
 const CATEGORIES = [
@@ -33,10 +36,10 @@ export function SiteFooter() {
           <div>
             <h3 className="mb-3 text-sm font-bold text-pink-700">エリアから探す</h3>
             <ul className="space-y-2 text-sm text-gray-600">
-              {PREFECTURES.slice(0, 5).map((p) => (
-                <li key={p}>
-                  <Link href={`/area/${p}`} className="hover:text-pink-600">
-                    {p}
+              {PREFECTURES.map((p) => (
+                <li key={p.slug}>
+                  <Link href={`/jobs/chatlady/${p.slug}`} className="hover:text-pink-600">
+                    {p.name}
                   </Link>
                 </li>
               ))}
@@ -46,18 +49,15 @@ export function SiteFooter() {
             <h3 className="mb-3 text-sm font-bold text-pink-700">コンテンツ</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li><Link href="/guides" className="hover:text-pink-600">ガイド記事</Link></li>
-              <li><Link href="/column" className="hover:text-pink-600">コラム</Link></li>
-              <li><Link href="/interview" className="hover:text-pink-600">先輩インタビュー</Link></li>
               <li><Link href="/shindan/mbti" className="hover:text-pink-600">MBTI診断</Link></li>
+              <li><Link href="/line" className="hover:text-pink-600">LINE相談</Link></li>
             </ul>
           </div>
           <div>
-            <h3 className="mb-3 text-sm font-bold text-pink-700">運営情報</h3>
+            <h3 className="mb-3 text-sm font-bold text-pink-700">高収入ナビについて</h3>
             <ul className="space-y-2 text-sm text-gray-600">
-              <li><Link href="/about" className="hover:text-pink-600">サイトについて</Link></li>
-              <li><Link href="/privacy" className="hover:text-pink-600">プライバシーポリシー</Link></li>
-              <li><Link href="/terms" className="hover:text-pink-600">利用規約</Link></li>
-              <li><Link href="/contact" className="hover:text-pink-600">お問い合わせ</Link></li>
+              <li><Link href="/jobs" className="hover:text-pink-600">求人一覧</Link></li>
+              <li><Link href="/line" className="hover:text-pink-600">お問い合わせ</Link></li>
             </ul>
           </div>
         </div>

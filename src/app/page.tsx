@@ -7,7 +7,7 @@ const CATEGORIES = [
   { slug: "mens-esthe", name: "メンズエステ", icon: "💆‍♀️", desc: "未経験OK" },
   { slug: "girls-bar", name: "ガールズバー", icon: "🍻", desc: "私服OK" },
   { slug: "concafe", name: "コンカフェ", icon: "☕", desc: "バイト感覚" },
-  { slug: "night-work", name: "ナイトワーク", icon: "🌙", desc: "高収入" },
+  { slug: "lounge", name: "ラウンジ", icon: "🌙", desc: "高収入" },
 ];
 
 const CONDITIONS = [
@@ -15,14 +15,14 @@ const CONDITIONS = [
 ];
 
 const POPULAR_AREAS = [
-  { name: "新宿", pref: "東京都" },
-  { name: "渋谷", pref: "東京都" },
-  { name: "池袋", pref: "東京都" },
-  { name: "梅田", pref: "大阪府" },
-  { name: "難波", pref: "大阪府" },
-  { name: "名駅", pref: "愛知県" },
-  { name: "栄", pref: "愛知県" },
-  { name: "博多", pref: "福岡県" },
+  { name: "東京都", pref: "tokyo" },
+  { name: "大阪府", pref: "osaka" },
+  { name: "愛知県", pref: "aichi" },
+  { name: "福岡県", pref: "fukuoka" },
+  { name: "北海道", pref: "hokkaido" },
+  { name: "神奈川県", pref: "kanagawa" },
+  { name: "埼玉県", pref: "saitama" },
+  { name: "千葉県", pref: "chiba" },
 ];
 
 export default function Home() {
@@ -86,7 +86,7 @@ export default function Home() {
             {CONDITIONS.map((c) => (
               <Link
                 key={c}
-                href={`/jobs?condition=${encodeURIComponent(c)}`}
+                href="/jobs"
                 className="rounded-full border border-pink-200 bg-white px-4 py-2 text-sm text-gray-700 hover:border-pink-400 hover:text-pink-600"
               >
                 {c}
@@ -105,12 +105,12 @@ export default function Home() {
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {POPULAR_AREAS.map((a) => (
               <Link
-                key={a.name}
-                href={`/area/${a.pref}`}
+                key={a.pref}
+                href={`/jobs/chatlady/${a.pref}`}
                 className="rounded-xl border border-pink-100 bg-white p-4 transition hover:border-pink-300 hover:shadow-sm"
               >
-                <div className="text-xs text-gray-500">{a.pref}</div>
                 <div className="mt-1 text-base font-bold text-gray-900">{a.name}</div>
+                <div className="text-xs text-gray-500">求人を見る</div>
               </Link>
             ))}
           </div>
