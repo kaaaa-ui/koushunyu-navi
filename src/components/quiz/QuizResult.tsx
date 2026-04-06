@@ -1,8 +1,10 @@
 "use client";
 
+import { useEffect } from "react";
 import { NaviChan } from "@/components/navi-chan";
 import type { MbtiType } from "@/lib/mbti-data";
 import { mbtiTypes } from "@/lib/mbti-data";
+import { gtagEvent } from "@/lib/gtag";
 
 const LINE_URL = "https://line.me/R/ti/p/%40309gsalq";
 const CHOUCHOU_URL = "https://chouchou-live.com/";
@@ -14,13 +16,24 @@ interface QuizResultProps {
 }
 
 export function QuizResult({ result, onRetry }: QuizResultProps) {
-  const resultUrl = `${SITE_URL}/result/${result.code}`;
+  // 結果表示時にGA4イベント送信
+  useEffect(() => {
+    gtagEvent("mbti_result", {
+      mbti_type: result.code,
+      mbti_name: result.name,
+      recommended_job: result.job,
+    });
+  }, [result.code, result.name, result.job]);
+
+  // UTMパラメータ付きの結果URL（流入元トラッキング）
+  const resultUrlForX = `${SITE_URL}/result/${result.code}?utm_source=twitter&utm_medium=social&utm_campaign=mbti_share`;
+  const resultUrlForLine = `${SITE_URL}/result/${result.code}?utm_source=line&utm_medium=social&utm_campaign=mbti_share`;
 
   const shareTextForX = encodeURIComponent(
     `私の副業MBTIタイプは【${result.code}】${result.name}でした！\nおすすめ副業: ${result.job}（月収${result.salary}円）\n\n#副業MBTI診断 #高収入ナビ`
   );
-  const xShareUrl = `https://twitter.com/intent/tweet?text=${shareTextForX}&url=${encodeURIComponent(resultUrl)}`;
-  const lineShareUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(resultUrl)}`;
+  const xShareUrl = `https://twitter.com/intent/tweet?text=${shareTextForX}&url=${encodeURIComponent(resultUrlForX)}`;
+  const lineShareUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(resultUrlForLine)}`;
 
   const goodTypes = result.goodMatch
     .map((code) => mbtiTypes[code])
@@ -28,6 +41,11 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
   const badTypes = result.badMatch
     .map((code) => mbtiTypes[code])
     .filter(Boolean);
+
+  // CTAクリック計測
+  const trackClick = (action: string, label: string) => {
+    gtagEvent(action, { event_category: "cta", event_label: label, mbti_type: result.code });
+  };
 
   return (
     <div className="quiz-fade-in mx-auto max-w-md px-4 py-8">
@@ -60,6 +78,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
               href={LINE_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackClick("line_click", "navi_description")}
               className="mt-2 inline-flex items-center gap-1 text-sm font-bold text-[#06C755] hover:underline"
             >
               続きをLINEで見る
@@ -118,6 +137,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
               href={LINE_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackClick("line_click", "recipe_teaser")}
               className="inline-flex items-center gap-2 rounded-full bg-[#06C755] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-green-200 transition-all hover:scale-105 hover:shadow-xl"
             >
               LINEで続きを見る
@@ -155,6 +175,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
             href={xShareUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackClick("share_click", "twitter")}
             className="flex flex-1 items-center justify-center gap-2 rounded-full bg-black px-4 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
           >
             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
@@ -166,6 +187,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
             href={lineShareUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackClick("share_click", "line")}
             className="flex flex-1 items-center justify-center gap-2 rounded-full bg-[#06C755] px-4 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
           >
             LINE でシェア
@@ -178,6 +200,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
             href={LINE_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackClick("line_click", "main_cta")}
             className="block w-full rounded-full bg-[#06C755] px-6 py-4 text-center font-bold text-white shadow-lg shadow-green-200 transition-transform hover:scale-105"
           >
             <span className="text-base">LINEで稼ぎ方を詳しく聞く</span>
@@ -189,6 +212,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
             href={CHOUCHOU_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackClick("cta_click", "chouchou")}
             className="block w-full rounded-full border-2 border-pink-300 bg-white px-6 py-3 text-center text-sm font-bold text-pink-600 transition-all hover:bg-pink-50"
           >
             ChouChouの詳細を見る
@@ -198,7 +222,10 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
         {/* リトライ */}
         <div className="mt-6 text-center">
           <button
-            onClick={onRetry}
+            onClick={() => {
+              gtagEvent("quiz_retry", { mbti_type: result.code });
+              onRetry();
+            }}
             className="text-sm text-pink-400 underline underline-offset-4 hover:text-pink-600"
           >
             もう一度診断する
