@@ -1,17 +1,25 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Monitor, Wine, Sparkles, Beer, Coffee, Moon, MapPin, Heart, Briefcase, Star, Clock, Home, Shield, Baby, CalendarDays } from "lucide-react";
+import { NaviChan, NaviChanBanner, NaviChanMessage } from "@/components/navi-chan";
 
 const CATEGORIES = [
-  { slug: "chatlady", name: "チャットレディ", icon: "💻", desc: "在宅OK・ノンアダOK" },
-  { slug: "cabaret-club", name: "キャバクラ", icon: "🥂", desc: "時給4,000円〜" },
-  { slug: "mens-esthe", name: "メンズエステ", icon: "💆‍♀️", desc: "未経験OK" },
-  { slug: "girls-bar", name: "ガールズバー", icon: "🍻", desc: "私服OK" },
-  { slug: "concafe", name: "コンカフェ", icon: "☕", desc: "バイト感覚" },
-  { slug: "lounge", name: "ラウンジ", icon: "🌙", desc: "高収入" },
+  { slug: "chatlady", name: "チャットレディ", icon: Monitor, desc: "在宅OK・ノンアダOK" },
+  { slug: "cabaret-club", name: "キャバクラ", icon: Wine, desc: "時給4,000円〜" },
+  { slug: "mens-esthe", name: "メンズエステ", icon: Sparkles, desc: "未経験OK" },
+  { slug: "girls-bar", name: "ガールズバー", icon: Beer, desc: "私服OK" },
+  { slug: "concafe", name: "コンカフェ", icon: Coffee, desc: "バイト感覚" },
+  { slug: "lounge", name: "ラウンジ", icon: Moon, desc: "高収入" },
 ];
 
 const CONDITIONS = [
-  "未経験OK", "日払い", "顔出しなし", "在宅", "週末のみ", "寮あり", "託児所あり", "短期OK",
+  { label: "未経験OK", icon: Star },
+  { label: "日払い", icon: Briefcase },
+  { label: "顔出しなし", icon: Shield },
+  { label: "在宅", icon: Home },
+  { label: "週末のみ", icon: CalendarDays },
+  { label: "寮あり", icon: MapPin },
+  { label: "託児所あり", icon: Baby },
+  { label: "短期OK", icon: Clock },
 ];
 
 const POPULAR_AREAS = [
@@ -25,81 +33,118 @@ const POPULAR_AREAS = [
   { name: "千葉県", pref: "chiba" },
 ];
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-gradient-to-b from-pink-50 to-white py-16">
-        <div className="mx-auto max-w-6xl px-4 text-center">
-          <div className="mb-4 text-6xl">💓</div>
-          <h1 className="mb-4 text-3xl font-bold text-gray-900 md:text-5xl">
-            あなたにぴったりの
-            <br />
-            高収入副業が見つかる
-          </h1>
-          <p className="mb-8 text-base text-gray-600 md:text-lg">
-            ナビちゃんが優しくナビゲート✨ 未経験から始められるお仕事多数
-          </p>
-          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button asChild size="lg" className="bg-pink-500 hover:bg-pink-600">
-              <Link href="/shindan/mbti">MBTI診断を始める</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-pink-300">
-              <Link href="/jobs">お仕事を探す</Link>
-            </Button>
+      {/* Hero with large ナビちゃん */}
+      <section className="sparkle-bg bg-gradient-to-b from-pink-100 via-pink-50 to-[#fff0f5] py-12 md:py-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="flex flex-col items-center gap-6 md:flex-row md:gap-12">
+            {/* ナビちゃん大きく表示 */}
+            <div className="shrink-0">
+              <div className="navi-float">
+                <NaviChan size="hero" rounded={false} />
+              </div>
+            </div>
+            {/* テキスト */}
+            <div className="text-center md:text-left">
+              <p className="mb-3 text-sm font-medium text-pink-400 tracking-widest">&#10022; YOUR BEST WORK AWAITS &#10022;</p>
+              <h1 className="font-heading text-3xl font-bold leading-snug text-pink-600 md:text-5xl md:leading-snug">
+                あなたにぴったりの
+                <br />
+                <span className="bg-gradient-to-r from-pink-500 to-pink-400 bg-clip-text text-transparent">高収入副業</span>が見つかる
+              </h1>
+              <p className="mt-4 text-[15px] leading-relaxed text-pink-900/60">
+                ナビちゃんが優しくナビゲート。未経験から始められるお仕事多数。
+              </p>
+              <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row md:justify-start">
+                <Link href="/shindan/mbti" className="btn-pink-gradient text-sm">
+                  MBTI診断を始める
+                </Link>
+                <Link
+                  href="/jobs"
+                  className="rounded-full border-2 border-pink-300 px-6 py-3 text-sm font-semibold text-pink-500 hover:bg-pink-50"
+                >
+                  お仕事を探す
+                </Link>
+              </div>
+              <p className="mt-6 text-sm text-pink-400">
+                全国 <span className="text-2xl font-bold text-pink-500">3,247</span> 件の高収入求人掲載中
+              </p>
+            </div>
           </div>
-          <p className="mt-6 text-sm text-gray-500">
-            全国 <span className="text-xl font-bold text-pink-600">3,247</span> 件の高収入求人掲載中
-          </p>
         </div>
       </section>
 
       {/* カテゴリー */}
-      <section className="py-12">
+      <section className="py-16">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="mb-8 text-center text-2xl font-bold text-gray-900">
+          <h2 className="section-title mb-10 text-2xl font-bold text-pink-600">
             職種から探す
           </h2>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-            {CATEGORIES.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/jobs/${c.slug}`}
-                className="rounded-2xl border border-pink-100 bg-white p-4 text-center shadow-sm transition hover:border-pink-300 hover:shadow-md"
-              >
-                <div className="mb-2 text-3xl">{c.icon}</div>
-                <div className="text-sm font-bold text-gray-900">{c.name}</div>
-                <div className="mt-1 text-xs text-gray-500">{c.desc}</div>
-              </Link>
-            ))}
+            {CATEGORIES.map((c) => {
+              const Icon = c.icon;
+              return (
+                <Link key={c.slug} href={`/jobs/${c.slug}`} className="card-kawaii p-5 text-center">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-pink-100 to-pink-50">
+                    <Icon className="h-5 w-5 text-pink-400" strokeWidth={1.5} />
+                  </div>
+                  <div className="text-sm font-bold text-pink-700">{c.name}</div>
+                  <div className="mt-1 text-xs text-pink-400">{c.desc}</div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* 条件 */}
-      <section className="bg-pink-50/50 py-12">
+      {/* ナビちゃんバナー：MBTI診断CTA */}
+      <section className="py-4">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="mb-8 text-center text-2xl font-bold text-gray-900">
+          <NaviChanBanner position="right">
+            <p className="mb-1 text-xs font-bold text-pink-400 tracking-wider">MBTI DIAGNOSIS</p>
+            <h2 className="mb-2 font-heading text-xl font-bold text-pink-600 md:text-2xl">
+              あなたに向いてるお仕事、診断してみない？
+            </h2>
+            <p className="mb-4 text-sm text-pink-900/60">
+              30秒のかんたん診断で、あなたのMBTIタイプにぴったりの高収入副業がわかるよ！
+            </p>
+            <Link href="/shindan/mbti" className="btn-pink-gradient inline-block text-sm">
+              無料で診断する
+            </Link>
+          </NaviChanBanner>
+        </div>
+      </section>
+
+      {/* 条件 */}
+      <section className="bg-gradient-to-b from-white to-pink-50/50 py-16">
+        <div className="mx-auto max-w-6xl px-4">
+          <h2 className="section-title mb-10 text-2xl font-bold text-pink-600">
             人気の条件で探す
           </h2>
-          <div className="flex flex-wrap justify-center gap-2">
-            {CONDITIONS.map((c) => (
-              <Link
-                key={c}
-                href="/jobs"
-                className="rounded-full border border-pink-200 bg-white px-4 py-2 text-sm text-gray-700 hover:border-pink-400 hover:text-pink-600"
-              >
-                {c}
-              </Link>
-            ))}
+          <div className="flex flex-wrap justify-center gap-3">
+            {CONDITIONS.map((c) => {
+              const Icon = c.icon;
+              return (
+                <Link
+                  key={c.label}
+                  href="/jobs"
+                  className="flex items-center gap-2 rounded-full border border-pink-200 bg-white px-5 py-2.5 text-sm text-pink-600 shadow-sm hover:border-pink-400 hover:shadow-md hover:shadow-pink-100"
+                >
+                  <Icon className="h-4 w-4 text-pink-400" strokeWidth={1.5} />
+                  {c.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* 人気エリア */}
-      <section className="py-12">
+      <section className="py-16">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="mb-8 text-center text-2xl font-bold text-gray-900">
+          <h2 className="section-title mb-10 text-2xl font-bold text-pink-600">
             人気エリアから探す
           </h2>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
@@ -107,40 +152,55 @@ export default function Home() {
               <Link
                 key={a.pref}
                 href={`/jobs/chatlady/${a.pref}`}
-                className="rounded-xl border border-pink-100 bg-white p-4 transition hover:border-pink-300 hover:shadow-sm"
+                className="card-kawaii flex items-center justify-between px-5 py-4"
               >
-                <div className="mt-1 text-base font-bold text-gray-900">{a.name}</div>
-                <div className="text-xs text-gray-500">求人を見る</div>
+                <span className="text-sm font-medium text-pink-700">{a.name}</span>
+                <span className="text-pink-400">&rarr;</span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ナビちゃんメッセージ */}
-      <section className="bg-gradient-to-r from-pink-100 to-yellow-50 py-12">
-        <div className="mx-auto max-w-3xl px-4">
-          <div className="rounded-3xl bg-white p-8 shadow-sm">
-            <div className="mb-4 flex items-center gap-3">
-              <div className="text-4xl">👧</div>
-              <div>
-                <div className="text-sm font-bold text-pink-600">ナビちゃんより💓</div>
-                <div className="text-xs text-gray-500">あなたの副業ナビゲーター</div>
-              </div>
-            </div>
-            <p className="text-sm leading-relaxed text-gray-700">
-              はじめまして、ナビちゃんだよ💓<br />
-              高収入のお仕事って「気になるけど不安...」って人が多いよね。
-              ナビちゃんは、そんなあなたが<b>安心してお仕事を選べる</b>ように、
-              業界のリアルな情報を優しくお届けするよ✨<br />
-              まずはMBTI診断で、あなたに合ったお仕事のタイプを調べてみよう🌸
+      {/* ナビちゃんバナー：LINE相談CTA */}
+      <section className="py-4">
+        <div className="mx-auto max-w-6xl px-4">
+          <NaviChanBanner position="left">
+            <p className="mb-1 text-xs font-bold text-pink-400 tracking-wider">LINE CONSULTATION</p>
+            <h2 className="mb-2 font-heading text-xl font-bold text-pink-600 md:text-2xl">
+              悩んでるなら、ナビちゃんに相談してね！
+            </h2>
+            <p className="mb-4 text-sm text-pink-900/60">
+              「どのお仕事が自分に合う？」「未経験でも大丈夫？」
+              <br />
+              なんでも気軽にLINEで聞いてね。無料だよ！
             </p>
-            <div className="mt-6 text-center">
-              <Button asChild className="bg-pink-500 hover:bg-pink-600">
-                <Link href="/line">LINEで相談してみる</Link>
-              </Button>
-            </div>
-          </div>
+            <Link href="/line" className="inline-block rounded-full bg-[#06C755] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-green-200 hover:bg-[#05b04c]">
+              LINEで相談する
+            </Link>
+          </NaviChanBanner>
+        </div>
+      </section>
+
+      {/* ナビちゃんメッセージ */}
+      <section className="sparkle-bg bg-gradient-to-b from-pink-50 to-yellow-50/30 py-16">
+        <div className="mx-auto max-w-3xl px-4">
+          <h2 className="section-title mb-10 text-2xl font-bold text-pink-600">
+            ナビちゃんからのメッセージ
+          </h2>
+          <NaviChanMessage>
+            <p>
+              はじめまして、ナビちゃんです。
+            </p>
+            <p className="mt-3">
+              高収入のお仕事って「気になるけど不安...」という方が多いですよね。
+              ナビちゃんは、そんなあなたが<b>安心してお仕事を選べる</b>ように、
+              業界のリアルな情報を優しくお届けします。
+            </p>
+            <p className="mt-3">
+              まずはMBTI診断で、あなたに合ったお仕事タイプを調べてみませんか。
+            </p>
+          </NaviChanMessage>
         </div>
       </section>
     </>

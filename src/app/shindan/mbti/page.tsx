@@ -1,15 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
+import { NaviChan, NaviChanBanner } from "@/components/navi-chan";
 
 const LINE_URL = "https://line.me/R/ti/p/%40309gsalq";
 const MBTI_FORM_URL = "https://liff.line.me/2009687184-04t9NtU8?unique_key=ZfPS7t&ts=1775445422";
 
 export const metadata: Metadata = {
   title: "副業MBTI診断｜あなたに合う高収入のお仕事は？",
-  description:
-    "MBTIタイプ別であなたにぴったりの副業・夜職がわかる無料診断。16タイプ別のおすすめ職種をナビちゃんが解説。LINEで簡単30秒診断",
+  description: "MBTIタイプ別であなたにぴったりの副業・夜職がわかる無料診断。16タイプ別のおすすめ職種をナビちゃんが解説。LINEで簡単30秒診断。",
   alternates: { canonical: "https://koushunyu-navi.com/shindan/mbti" },
 };
 
@@ -35,83 +34,64 @@ const MBTI_TYPES = [
 export default function MbtiPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
-      <nav className="mb-6 text-sm text-gray-500">
-        <Link href="/" className="hover:text-pink-600">Top</Link>
+      <nav className="mb-6 text-sm text-pink-400">
+        <Link href="/" className="hover:text-pink-500">Top</Link>
         <span className="mx-2">/</span>
-        <Link href="/shindan/mbti" className="text-gray-700">MBTI診断</Link>
+        <span className="text-pink-700">MBTI診断</span>
       </nav>
 
-      {/* ヒーローバナー */}
-      <div className="mb-8 overflow-hidden rounded-2xl">
-        <Image
-          src="/mbti-banner.png"
-          alt="副業MBTI診断｜診断はこちらのLINEから"
-          width={1200}
-          height={675}
-          className="w-full"
-          priority
-        />
-      </div>
-
-      {/* 導入 */}
-      <div className="mb-8 text-center">
-        <h1 className="mb-3 text-2xl font-bold text-gray-900 md:text-3xl">
+      {/* ヒーロー：ナビちゃん大きく */}
+      <div className="mb-8 sparkle-bg rounded-3xl bg-gradient-to-br from-pink-100 via-pink-50 to-yellow-50/20 p-8 text-center border border-pink-200">
+        <div className="navi-float mb-4">
+          <NaviChan size="2xl" rounded={false} className="mx-auto" />
+        </div>
+        <h1 className="mb-3 font-heading text-2xl font-bold text-pink-600 md:text-3xl">
           副業MBTI診断
         </h1>
-        <p className="text-gray-600 leading-relaxed">
+        <p className="text-sm leading-relaxed text-pink-900/60">
           あなたのMBTIタイプから、ぴったりの高収入のお仕事がわかるよ。
           <br />
           LINEで30秒のかんたん診断、やってみない？
         </p>
-      </div>
-
-      {/* CTA */}
-      <div className="mb-12 text-center">
-        <Button asChild size="lg" className="bg-[#06C755] hover:bg-[#05b04c] text-white text-base px-8 py-6">
-          <a href={MBTI_FORM_URL} target="_blank" rel="noopener noreferrer">
+        <div className="mt-6">
+          <a href={MBTI_FORM_URL} target="_blank" rel="noopener noreferrer" className="btn-pink-gradient inline-block text-sm">
             LINEで無料診断する
           </a>
-        </Button>
-        <p className="mt-3 text-xs text-gray-400">※ 完全無料・30秒で完了</p>
+          <p className="mt-3 text-xs text-pink-400">※ 完全無料・30秒で完了</p>
+        </div>
       </div>
 
-      {/* 16タイプ一覧 */}
       <section className="mb-12">
-        <h2 className="mb-6 text-center text-xl font-bold text-gray-900">
+        <h2 className="section-title mb-8 text-xl font-bold text-pink-600">
           16タイプ別おすすめ職種
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {MBTI_TYPES.map(({ type, job, reason }) => (
-            <div
-              key={type}
-              className="flex items-start gap-3 rounded-xl border border-pink-100 bg-white p-4"
-            >
-              <span className="shrink-0 rounded-lg bg-pink-100 px-2 py-1 text-sm font-bold text-pink-700">
+            <div key={type} className="card-kawaii flex items-start gap-3 p-4">
+              <span className="shrink-0 rounded-full bg-gradient-to-br from-pink-400 to-pink-500 px-2.5 py-1 text-xs font-bold text-white">
                 {type}
               </span>
               <div>
-                <div className="text-sm font-medium text-gray-900">{job}</div>
-                <div className="text-xs text-gray-500">{reason}</div>
+                <div className="text-sm font-medium text-pink-700">{job}</div>
+                <div className="text-xs text-pink-400">{reason}</div>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 最下部CTA */}
-      <div className="rounded-3xl bg-gradient-to-r from-pink-100 to-yellow-50 p-8 text-center">
-        <div className="mb-2 text-3xl">👧</div>
-        <p className="mb-4 text-sm text-gray-700 leading-relaxed">
+      {/* 下部CTAバナー */}
+      <NaviChanBanner position="right">
+        <p className="mb-2 text-sm font-bold text-pink-600">
           自分のタイプがわからなくても大丈夫！
-          <br />
+        </p>
+        <p className="mb-4 text-sm text-pink-900/60">
           LINEで質問に答えるだけで、ナビちゃんが診断するよ
         </p>
-        <Button asChild size="lg" className="bg-[#06C755] hover:bg-[#05b04c] text-white text-base px-8 py-6">
-          <a href={MBTI_FORM_URL} target="_blank" rel="noopener noreferrer">
-            LINEで無料診断する
-          </a>
-        </Button>
-      </div>
+        <a href={MBTI_FORM_URL} target="_blank" rel="noopener noreferrer" className="inline-block rounded-full bg-[#06C755] px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-green-200 hover:bg-[#05b04c]">
+          LINEで無料診断する
+        </a>
+      </NaviChanBanner>
     </div>
   );
 }
