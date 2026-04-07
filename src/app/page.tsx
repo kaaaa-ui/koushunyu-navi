@@ -36,8 +36,36 @@ const POPULAR_AREAS = [
 ];
 
 export default function HomePage() {
+  const websiteLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "高収入ナビ",
+    alternateName: "高収入ナビ｜副業MAP",
+    url: "https://koushunyu-navi.vercel.app",
+    description: "女性向け高収入求人メディア。チャトレ・キャバ・メンエスなど未経験から始められるお仕事を紹介",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://koushunyu-navi.vercel.app/jobs?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  const orgLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "高収入ナビ",
+    url: "https://koushunyu-navi.vercel.app",
+    logo: "https://koushunyu-navi.vercel.app/navi-chan.png",
+    sameAs: [
+      "https://x.com/iTfoAOK2sY35984",
+      "https://www.tiktok.com/@koushunyu_navi",
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
       {/* Hero with large ナビちゃん */}
       <section className="sparkle-bg bg-gradient-to-b from-pink-100 via-pink-50 to-[#fff0f5] py-12 md:py-20">
         <div className="mx-auto max-w-6xl px-4">

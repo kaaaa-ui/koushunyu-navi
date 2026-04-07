@@ -37,9 +37,6 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
-  verification: {
-    google: "GSC_VERIFICATION_CODE",
-  },
 };
 
 export default function RootLayout({
