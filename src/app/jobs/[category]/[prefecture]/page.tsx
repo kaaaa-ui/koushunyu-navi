@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getAllJobPages, getJobPage, getCategoryLabel, getPrefectureLabel } from "@/lib/jobs";
+import { getAllJobPages, getJobPage, getCategoryLabel, getPrefectureLabel, CONDITION_LABELS, TOP_PREFECTURES, getPrefecturesByCategory } from "@/lib/jobs";
 import { parseMarkdown } from "@/lib/markdown";
 import { NaviChan, NaviChanBanner } from "@/components/navi-chan";
 import { ExternalLink } from "lucide-react";
@@ -32,6 +32,12 @@ export default async function JobPrefecturePage({ params }: { params: Promise<{ 
   const { htmlContent } = await parseMarkdown(job.content);
   const catLabel = getCategoryLabel(category);
   const prefLabel = getPrefectureLabel(prefecture);
+  const isTopPref = TOP_PREFECTURES.includes(prefecture);
+
+  // 同じカテゴリの他の都道府県
+  const otherPrefs = getPrefecturesByCategory(category).filter((p) => p !== prefecture);
+  // 近隣エリアを5件表示
+  const nearbyPrefs = otherPrefs.slice(0, 8);
 
   const jobPostingLd = {
     "@context": "https://schema.org", "@type": "JobPosting",
@@ -46,6 +52,7 @@ export default async function JobPrefecturePage({ params }: { params: Promise<{ 
     mainEntity: [
       { "@type": "Question", name: `${prefLabel}の${catLabel}は未経験でも大丈夫？`, acceptedAnswer: { "@type": "Answer", text: `はい、${prefLabel}の${catLabel}求人の多くは未経験OKです。研修やサポート体制が整った店舗を選ぶのがおすすめです。` } },
       { "@type": "Question", name: `${prefLabel}の${catLabel}の時給相場は？`, acceptedAnswer: { "@type": "Answer", text: `${prefLabel}の${catLabel}の時給はエリアや店舗により異なりますが、詳しくはページ内の相場データをご確認ください。` } },
+      { "@type": "Question", name: `${prefLabel}で${catLabel}の在宅求人はある？`, acceptedAnswer: { "@type": "Answer", text: `${catLabel}の在宅対応状況はお仕事の種類により異なります。チャットレディは完全在宅対応の求人が多数あります。` } },
     ],
   };
 
@@ -79,9 +86,70 @@ export default async function JobPrefecturePage({ params }: { params: Promise<{ 
           <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         </div>
 
+        {/* 条件で絞り込む - 内部リンクエンジン */}
+        {isTopPref && (
+          <div className="my-8">
+            <h3 className="mb-4 font-heading text-lg font-bold text-pink-600">
+              条件で絞り込む
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {Object.entries(CONDITION_LABELS).map(([slug, label]) => (
+                <Link
+                  key={slug}
+                  href={`/jobs/${category}/${prefecture}/${slug}`}
+                  className="rounded-full border border-pink-200 bg-white px-4 py-2 text-sm text-pink-600 hover:border-pink-400 hover:shadow-sm"
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 他のエリアで探す - 内部リンクエンジン */}
+        <div className="my-8">
+          <h3 className="mb-4 font-heading text-lg font-bold text-pink-600">
+            {catLabel}を他のエリアで探す
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {nearbyPrefs.map((p) => (
+              <Link
+                key={p}
+                href={`/jobs/${category}/${p}`}
+                className="rounded-full border border-pink-200 bg-white px-4 py-2 text-sm text-pink-600 hover:border-pink-400 hover:shadow-sm"
+              >
+                {getPrefectureLabel(p)}
+              </Link>
+            ))}
+            {otherPrefs.length > 8 && (
+              <Link
+                href={`/jobs/${category}`}
+                className="rounded-full border border-pink-300 bg-pink-50 px-4 py-2 text-sm font-medium text-pink-600 hover:bg-pink-100"
+              >
+                全エリアを見る →
+              </Link>
+            )}
+          </div>
+        </div>
+
+        {/* 関連ガイド記事 - 内部リンクエンジン */}
+        <div className="my-8 rounded-2xl border border-pink-100 bg-white p-6">
+          <h3 className="mb-3 font-heading text-base font-bold text-pink-600">関連ガイド記事</h3>
+          <ul className="space-y-2 text-sm">
+            {category === "chatlady" && (
+              <>
+                <li><Link href="/guides/chatre-home-guide" className="text-pink-500 hover:text-pink-700">チャトレ在宅完全ガイド｜未経験でも月30万稼げる始め方</Link></li>
+                <li><Link href="/guides/fukugyo-10man" className="text-pink-500 hover:text-pink-700">副業チャトレで月10万を達成する3つの働き方</Link></li>
+              </>
+            )}
+            <li><Link href="/guides/mibare-manual" className="text-pink-500 hover:text-pink-700">身バレ対策完全マニュアル</Link></li>
+            <li><Link href="/guides/kakuteishinkoku-guide" className="text-pink-500 hover:text-pink-700">確定申告完全ガイド</Link></li>
+            <li><Link href="/guides/menseki-taiken" className="text-pink-500 hover:text-pink-700">面接〜体験入店の流れ完全ガイド</Link></li>
+          </ul>
+        </div>
+
         {/* 求人応募CTA */}
         <div className="my-12 space-y-6">
-          {/* チャトレのみ: chouchouリンク */}
           {category === "chatlady" && (
             <div className="rounded-2xl border border-pink-200 bg-white p-6 text-center shadow-sm">
               <p className="mb-1 text-xs font-bold text-pink-400 tracking-wider">FIND YOUR JOB</p>
@@ -103,7 +171,6 @@ export default async function JobPrefecturePage({ params }: { params: Promise<{ 
             </div>
           )}
 
-          {/* チャトレ以外: チャトレも提案 */}
           {category !== "chatlady" && (
             <div className="sparkle-bg rounded-2xl border border-pink-200 bg-gradient-to-r from-pink-50 to-yellow-50/30 p-6">
               <div className="flex items-start gap-4">
@@ -127,7 +194,6 @@ export default async function JobPrefecturePage({ params }: { params: Promise<{ 
             </div>
           )}
 
-          {/* LINE相談 + MBTI（共通） */}
           <NaviChanBanner position="right">
             <p className="mb-1 text-xs font-bold text-pink-400 tracking-wider">LINE CONSULTATION</p>
             <h3 className="mb-2 font-heading text-lg font-bold text-pink-600">

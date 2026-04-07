@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { NAVI_OGP_BASE64 } from "@/lib/navi-ogp-base64";
 
 export const runtime = "edge";
 export const alt = "高収入ナビ｜副業MAP";
@@ -6,6 +7,10 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function Image() {
+  const zenOldMincho = await fetch(
+    "https://fonts.gstatic.com/s/zenoldmincho/v21/tss5ApVaYiLEpZ2cQR4C3EvZ2B-urp-bPJXGfA.woff"
+  ).then((r) => r.arrayBuffer());
+
   return new ImageResponse(
     (
       <div
@@ -16,59 +21,101 @@ export default async function Image() {
           background: "linear-gradient(135deg, #fce7f3 0%, #fff0f5 50%, #fef3c7 100%)",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: "sans-serif",
+          fontFamily: "Zen Old Mincho, serif",
+          position: "relative",
         }}
       >
+        {/* ナビちゃん */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginRight: 48,
+          }}
+        >
+          <img
+            src={NAVI_OGP_BASE64}
+            width={260}
+            height={260}
+            style={{
+              borderRadius: "50%",
+              border: "4px solid white",
+              boxShadow: "0 8px 32px rgba(236, 72, 153, 0.3)",
+            }}
+          />
+        </div>
+
+        {/* テキスト */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "flex-start",
             justifyContent: "center",
-            textAlign: "center",
           }}
         >
           <div
             style={{
-              fontSize: 28,
-              color: "#f472b6",
-              letterSpacing: "0.2em",
-              marginBottom: 16,
-            }}
-          >
-            YOUR BEST WORK AWAITS
-          </div>
-          <div
-            style={{
-              fontSize: 64,
+              fontSize: 72,
               fontWeight: 700,
               color: "#ec4899",
-              lineHeight: 1.3,
-              marginBottom: 16,
+              lineHeight: 1.2,
             }}
           >
             高収入ナビ
           </div>
           <div
             style={{
-              fontSize: 32,
+              fontSize: 28,
               color: "#9d174d",
-              marginBottom: 24,
+              marginTop: 8,
+              letterSpacing: "0.15em",
             }}
           >
             副業MAP
           </div>
           <div
             style={{
-              fontSize: 20,
-              color: "#a06080",
+              display: "flex",
+              width: 240,
+              height: 2,
+              background: "linear-gradient(to right, #ec4899, transparent)",
+              marginTop: 20,
+              marginBottom: 20,
+            }}
+          />
+          <div
+            style={{
+              fontSize: 22,
+              color: "#6b2140",
+              lineHeight: 1.6,
             }}
           >
-            ナビちゃんが優しくナビゲート。未経験から始められるお仕事多数。
+            ナビちゃんが優しくナビゲート
+          </div>
+          <div
+            style={{
+              fontSize: 18,
+              color: "#9d6080",
+              marginTop: 4,
+            }}
+          >
+            未経験OK・在宅OK・高収入のお仕事多数
           </div>
         </div>
       </div>
     ),
-    { ...size }
+    {
+      ...size,
+      fonts: [
+        {
+          name: "Zen Old Mincho",
+          data: zenOldMincho,
+          weight: 700,
+          style: "normal",
+        },
+      ],
+    }
   );
 }

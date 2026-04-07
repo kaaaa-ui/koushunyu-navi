@@ -24,11 +24,11 @@ const zenKaku = Zen_Kaku_Gothic_New({
 export const metadata: Metadata = {
   metadataBase: new URL("https://koushunyu-navi.vercel.app"),
   title: {
-    default: "高収入ナビ｜副業MAP - 女性の高収入副業・夜職を優しくナビゲート",
-    template: "%s - 高収入ナビ",
+    default: "高収入ナビ｜女性の高収入バイト・副業求人3,900件以上【2026年最新】",
+    template: "%s｜高収入ナビ",
   },
   description:
-    "高収入ナビはナビちゃんが案内する女性向け高収入求人メディア。チャトレ・キャバ・メンエスなど、未経験から始められるお仕事を優しく解説。安全な店選びのコツも。",
+    "チャトレ・キャバ・メンエスなど女性向け高収入求人3,900件以上。未経験OK・在宅OK・日払いなど条件別に探せる。ナビちゃんが安全なお店選びを優しくナビゲート。",
   openGraph: {
     type: "website",
     locale: "ja_JP",
@@ -36,6 +36,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+  },
+  verification: {
+    google: "GSC_VERIFICATION_CODE",
   },
 };
 

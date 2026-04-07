@@ -12,14 +12,16 @@ const CATEGORIES = [
 ];
 
 const CONDITIONS = [
-  { label: "未経験OK", icon: Star },
-  { label: "日払い", icon: Briefcase },
-  { label: "顔出しなし", icon: Shield },
-  { label: "在宅", icon: Home },
-  { label: "週末のみ", icon: CalendarDays },
-  { label: "寮あり", icon: MapPin },
-  { label: "託児所あり", icon: Baby },
-  { label: "短期OK", icon: Clock },
+  { label: "未経験OK", icon: Star, slug: "miken" },
+  { label: "日払い", icon: Briefcase, slug: "hibarai" },
+  { label: "顔出しなし", icon: Shield, slug: "kaodashi-nashi" },
+  { label: "在宅OK", icon: Home, slug: "zaitaku" },
+  { label: "週末のみOK", icon: CalendarDays, slug: "shumatsu" },
+  { label: "寮あり", icon: MapPin, slug: "ryo" },
+  { label: "託児所あり", icon: Baby, slug: "takujisho" },
+  { label: "短期OK", icon: Clock, slug: "tanki" },
+  { label: "高時給", icon: Heart, slug: "kokyuyo" },
+  { label: "体入OK", icon: Sparkles, slug: "taiin" },
 ];
 
 const POPULAR_AREAS = [
@@ -69,7 +71,7 @@ export default function HomePage() {
                 </Link>
               </div>
               <p className="mt-6 text-sm text-pink-400">
-                全国 <span className="text-2xl font-bold text-pink-500">3,247</span> 件の高収入求人掲載中
+                全国 <span className="text-2xl font-bold text-pink-500">3,940</span> 件以上の高収入求人掲載中
               </p>
             </div>
           </div>
@@ -129,7 +131,7 @@ export default function HomePage() {
               return (
                 <Link
                   key={c.label}
-                  href="/jobs"
+                  href={`/jobs/conditions/${c.slug}`}
                   className="flex items-center gap-2 rounded-full border border-pink-200 bg-white px-5 py-2.5 text-sm text-pink-600 shadow-sm hover:border-pink-400 hover:shadow-md hover:shadow-pink-100"
                 >
                   <Icon className="h-4 w-4 text-pink-400" strokeWidth={1.5} />
