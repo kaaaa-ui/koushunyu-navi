@@ -28,7 +28,7 @@ async function submitToIndexNow(urls: string[]) {
     const batch = urls.slice(i, i + batchSize);
     const batchNum = Math.floor(i / batchSize) + 1;
 
-    const res = await fetch("https://api.indexnow.org/indexnow", {
+    const res = await fetch("https://www.bing.com/indexnow", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
