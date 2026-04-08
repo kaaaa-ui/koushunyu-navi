@@ -10,9 +10,9 @@ const LINE_ADD_URL = "https://line.me/R/ti/p/%40309gsalq";
 const CHOUCHOU_URL = "https://chouchou-live.com/";
 const SITE_URL = "https://fukugyo-mbti.vercel.app";
 
-/** タイプコードを自動入力してLINEチャットを開くURL */
+/** タイプコード+「診断結果」を自動入力してLINEチャットを開くURL */
 function getLineMessageUrl(typeCode: string) {
-  return `https://line.me/R/oaMessage/%40309gsalq/?${encodeURIComponent(typeCode)}`;
+  return `https://line.me/R/oaMessage/%40309gsalq/?${encodeURIComponent(typeCode + "診断結果")}`;
 }
 
 interface QuizResultProps {
@@ -224,17 +224,11 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
           </a>
         </div>
 
-        {/* リトライ */}
+        {/* 1回制限の注意書き */}
         <div className="mt-6 text-center">
-          <button
-            onClick={() => {
-              gtagEvent("quiz_retry", { mbti_type: result.code });
-              onRetry();
-            }}
-            className="text-sm text-pink-400 underline underline-offset-4 hover:text-pink-600"
-          >
-            もう一度診断する
-          </button>
+          <p className="text-xs text-pink-400">
+            診断は1人1回までです
+          </p>
         </div>
       </div>
     </div>
