@@ -26,7 +26,7 @@ export function SiteHeader() {
           href="/line"
           className="btn-pink-gradient !rounded-full !px-5 !py-2 text-xs"
         >
-          LINE相談
+          LINE質問
         </Link>
       </div>
     </header>

@@ -19,6 +19,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/jobs`, lastModified: now, changeFrequency: "daily", priority: 0.9 },
     { url: `${BASE_URL}/shindan/mbti`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/line`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/privacy`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    // TODO: /terms ページ作成後に追加
 
     // Guide pages
     ...guides.map((g) => ({

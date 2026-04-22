@@ -181,7 +181,7 @@ export default async function JobPrefecturePage({ params }: { params: Promise<{ 
                   </h3>
                   <p className="mb-3 text-sm text-pink-900/60">
                     {catLabel}もいいけど、<b>チャットレディ</b>なら在宅OK・未経験OK・顔出しなしで始められるよ！
-                    自分のペースで高収入が目指せるから、副業デビューにぴったり。
+                    自分のペースで高収入が目指せるから、初めての方にもぴったり。
                   </p>
                   <Link
                     href={`/jobs/chatlady/${prefecture}`}

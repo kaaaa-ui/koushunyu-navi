@@ -4,9 +4,9 @@ import { getAllGuides } from "@/lib/guides";
 import { NaviChan } from "@/components/navi-chan";
 
 export const metadata: Metadata = {
-  title: "ガイド記事一覧｜高収入副業を始める前に読むべき完全ガイド",
+  title: "ガイド記事一覧｜高収入バイト業界を知るための完全ガイド",
   description:
-    "チャトレ・キャバ・メンエスなど、高収入副業を始める前に読むべきガイド記事まとめ。ナビちゃんが優しく解説。",
+    "チャトレ・キャバ・メンエスなど、高収入バイト業界を知るためのガイド記事まとめ。ナビちゃんが優しく解説。",
 };
 
 export default function GuidesPage() {
@@ -25,7 +25,7 @@ export default function GuidesPage() {
         <div>
           <h1 className="section-title text-2xl font-bold text-pink-600">ガイド記事一覧</h1>
           <p className="mt-4 text-sm text-pink-900/60">
-            ナビちゃんが高収入副業の始め方を優しく解説した完全ガイド集。
+            ナビちゃんが高収入バイト業界について優しく解説した完全ガイド集。
           </p>
         </div>
       </div>

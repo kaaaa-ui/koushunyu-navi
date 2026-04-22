@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { MbtiQuiz } from "./mbti-quiz";
 
 export const metadata: Metadata = {
-  title: "副業MBTI診断｜あなたに合う高収入のお仕事は？",
+  title: "MBTI職種タイプチェック｜あなたに合う傾向がある職種は？",
   description:
-    "MBTIタイプ別であなたにぴったりの副業・夜職がわかる無料診断。16タイプ別のおすすめ職種をナビちゃんが解説。全10問・約1分で完了。",
+    "MBTIタイプ別であなたに向いてる傾向がある職種タイプがわかる無料診断。16タイプ別の傾向をナビちゃんが解説。全10問・約1分で完了。",
   alternates: { canonical: "https://koushunyu-navi.vercel.app/shindan/mbti" },
 };
 

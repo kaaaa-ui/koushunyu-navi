@@ -117,13 +117,16 @@ export default async function GuidePage({
 
         <div className="my-12 rounded-3xl bg-gradient-to-r from-pink-100 to-yellow-50 p-8 text-center">
           <p className="mb-4 text-sm text-pink-700">
-            お仕事のこと、もっと詳しく聞きたい？
+            業界のこと、もっと詳しく知りたい？
             <br />
-            ナビちゃんとLINEで相談できるよ
+            ナビちゃんにLINEで質問できるよ
           </p>
           <Link href="/line" className="btn-pink-gradient text-sm">
-            LINEで無料相談する
+            LINEで質問する
           </Link>
+          <p className="mt-3 text-xs text-pink-400">
+            ※業界の一般情報をご案内しています。個別の店舗紹介・お仕事の斡旋は行っておりません。
+          </p>
         </div>
       </article>
     </>

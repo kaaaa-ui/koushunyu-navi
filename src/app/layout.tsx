@@ -24,11 +24,11 @@ const zenKaku = Zen_Kaku_Gothic_New({
 export const metadata: Metadata = {
   metadataBase: new URL("https://koushunyu-navi.vercel.app"),
   title: {
-    default: "高収入ナビ｜女性の高収入バイト・副業求人3,900件以上【2026年最新】",
+    default: "高収入ナビ｜女性の高収入バイト業界ガイド・情報メディア【2026年版】",
     template: "%s｜高収入ナビ",
   },
   description:
-    "チャトレ・キャバ・メンエスなど女性向け高収入求人3,900件以上。未経験OK・在宅OK・日払いなど条件別に探せる。ナビちゃんが安全なお店選びを優しくナビゲート。",
+    "女性向け高収入バイトの業界ガイド・情報メディア。チャットレディ、キャバクラ、メンズエステなどの職種解説、働き方、税金、MBTI診断での職種タイプチェックまでやさしく解説。",
   openGraph: {
     type: "website",
     locale: "ja_JP",
@@ -36,6 +36,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+  },
+  verification: {
+    google: "TDUC9VsGYYK-V2WKEvQVKj3mQ5YEhHYjFPm5f61wwWM",
   },
 };
 
@@ -61,6 +64,23 @@ export default function RootLayout({
         </head>
       )}
       <body className="min-h-full flex flex-col bg-[#fff0f5] text-[#4a2040]">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "高収入ナビ",
+              url: "https://koushunyu-navi.vercel.app",
+              description: "女性向け高収入バイトの業界ガイド・情報メディア",
+              publisher: {
+                "@type": "Organization",
+                name: "高収入ナビ編集部",
+              },
+              inLanguage: "ja",
+            }),
+          }}
+        />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

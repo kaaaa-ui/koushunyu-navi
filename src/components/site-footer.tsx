@@ -82,7 +82,7 @@ export function SiteFooter() {
               <li><Link href="/guides/chatre-home-guide" className="hover:text-pink-500">チャトレ在宅ガイド</Link></li>
               <li><Link href="/guides/mibare-manual" className="hover:text-pink-500">身バレ対策マニュアル</Link></li>
               <li><Link href="/shindan/mbti" className="hover:text-pink-500">MBTI診断</Link></li>
-              <li><Link href="/line" className="hover:text-pink-500">LINE相談</Link></li>
+              <li><Link href="/line" className="hover:text-pink-500">LINE質問</Link></li>
             </ul>
           </div>
           <div>
@@ -91,6 +91,8 @@ export function SiteFooter() {
               <li><Link href="/jobs" className="hover:text-pink-500">求人一覧</Link></li>
               <li><Link href="/guides" className="hover:text-pink-500">お役立ち情報</Link></li>
               <li><Link href="/line" className="hover:text-pink-500">お問い合わせ</Link></li>
+              <li><Link href="/about" className="hover:text-pink-500">運営者情報</Link></li>
+              <li><Link href="/privacy" className="hover:text-pink-500">プライバシーポリシー</Link></li>
             </ul>
           </div>
         </div>

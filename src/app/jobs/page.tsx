@@ -9,7 +9,7 @@ const LINE_URL = "https://line.me/R/ti/p/%40309gsalq";
 
 export const metadata: Metadata = {
   title: "求人一覧｜職種×エリアで探す",
-  description: "チャットレディ・キャバクラ・メンズエステなど、全国の高収入求人を職種×エリアで探せます。",
+  description: "チャットレディ・キャバクラ・メンズエステなど、全国の高収入バイト情報を職種×エリアで解説しています。",
   alternates: { canonical: "https://koushunyu-navi.vercel.app/jobs" },
 };
 
@@ -101,7 +101,7 @@ export default function JobsIndexPage() {
             自分に合うお仕事がわからない？
           </h3>
           <p className="mb-4 text-sm text-pink-900/60">
-            ナビちゃんにLINEで相談してね！MBTI診断もできるよ。
+            ナビちゃんにLINEで質問してね！MBTI診断もできるよ。
           </p>
           <div className="flex flex-wrap gap-3">
             <a
@@ -110,7 +110,7 @@ export default function JobsIndexPage() {
               rel="noopener noreferrer"
               className="inline-block rounded-full bg-[#06C755] px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-green-200 hover:bg-[#05b04c]"
             >
-              LINEで相談する
+              LINEで質問する
             </a>
             <Link
               href="/shindan/mbti"

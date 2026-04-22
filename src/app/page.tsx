@@ -3,12 +3,12 @@ import { Monitor, Wine, Sparkles, Beer, Coffee, Moon, MapPin, Heart, Briefcase, 
 import { NaviChan, NaviChanBanner, NaviChanMessage } from "@/components/navi-chan";
 
 const CATEGORIES = [
-  { slug: "chatlady", name: "チャットレディ", icon: Monitor, desc: "在宅OK・ノンアダOK" },
-  { slug: "cabaret-club", name: "キャバクラ", icon: Wine, desc: "時給4,000円〜" },
-  { slug: "mens-esthe", name: "メンズエステ", icon: Sparkles, desc: "未経験OK" },
-  { slug: "girls-bar", name: "ガールズバー", icon: Beer, desc: "私服OK" },
-  { slug: "concafe", name: "コンカフェ", icon: Coffee, desc: "バイト感覚" },
-  { slug: "lounge", name: "ラウンジ", icon: Moon, desc: "高収入" },
+  { slug: "chatlady", name: "チャットレディ", icon: Monitor, desc: "在宅で働ける定番職種" },
+  { slug: "cabaret-club", name: "キャバクラ", icon: Wine, desc: "夜職の王道・時給相場" },
+  { slug: "mens-esthe", name: "メンズエステ", icon: Sparkles, desc: "業界のキホン解説" },
+  { slug: "girls-bar", name: "ガールズバー", icon: Beer, desc: "カジュアルな夜職" },
+  { slug: "concafe", name: "コンカフェ", icon: Coffee, desc: "昼職感覚で働ける" },
+  { slug: "lounge", name: "ラウンジ", icon: Moon, desc: "落ち着いた接客業" },
 ];
 
 const CONDITIONS = [
@@ -40,9 +40,9 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "高収入ナビ",
-    alternateName: "高収入ナビ｜副業MAP",
+    alternateName: "高収入ナビ｜高収入バイト情報メディア",
     url: "https://koushunyu-navi.vercel.app",
-    description: "女性向け高収入求人メディア。チャトレ・キャバ・メンエスなど未経験から始められるお仕事を紹介",
+    description: "女性向け高収入バイトの情報メディア。チャトレ・キャバ・メンエスなど業界の基礎知識をやさしく解説",
     potentialAction: {
       "@type": "SearchAction",
       target: "https://koushunyu-navi.vercel.app/jobs?q={search_term_string}",
@@ -78,28 +78,30 @@ export default function HomePage() {
             </div>
             {/* テキスト */}
             <div className="text-center md:text-left">
-              <p className="mb-3 text-sm font-medium text-pink-400 tracking-widest">&#10022; YOUR BEST WORK AWAITS &#10022;</p>
+              <p className="mb-3 text-sm font-medium text-pink-400 tracking-widest">&#10022; YOUR BEST CHOICE AWAITS &#10022;</p>
               <h1 className="font-heading text-3xl font-bold leading-snug text-pink-600 md:text-5xl md:leading-snug">
-                あなたにぴったりの
+                <span className="bg-gradient-to-r from-pink-500 to-pink-400 bg-clip-text text-transparent">高収入バイト</span>のこと、
                 <br />
-                <span className="bg-gradient-to-r from-pink-500 to-pink-400 bg-clip-text text-transparent">高収入副業</span>が見つかる
+                やさしく解説します
               </h1>
               <p className="mt-4 text-[15px] leading-relaxed text-pink-900/60">
-                ナビちゃんが優しくナビゲート。未経験から始められるお仕事多数。
+                気になる業界のリアル、働き方の基本、MBTIでわかる職種タイプまで。
+                <br />
+                ナビちゃんと一緒に情報収集しよ。
               </p>
               <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row md:justify-start">
                 <Link href="/shindan/mbti" className="btn-pink-gradient text-sm">
                   MBTI診断を始める
                 </Link>
                 <Link
-                  href="/jobs"
+                  href="/guides"
                   className="rounded-full border-2 border-pink-300 px-6 py-3 text-sm font-semibold text-pink-500 hover:bg-pink-50"
                 >
-                  お仕事を探す
+                  業界ガイドを読む
                 </Link>
               </div>
               <p className="mt-6 text-sm text-pink-400">
-                全国 <span className="text-2xl font-bold text-pink-500">3,940</span> 件以上の高収入求人掲載中
+                全国 <span className="text-2xl font-bold text-pink-500">3,940</span> 件以上の求人情報を解説・紹介中
               </p>
             </div>
           </div>
@@ -110,7 +112,7 @@ export default function HomePage() {
       <section className="py-16">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="section-title mb-10 text-2xl font-bold text-pink-600">
-            職種から探す
+            職種について知る
           </h2>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
             {CATEGORIES.map((c) => {
@@ -133,12 +135,14 @@ export default function HomePage() {
       <section className="py-4">
         <div className="mx-auto max-w-6xl px-4">
           <NaviChanBanner position="right">
-            <p className="mb-1 text-xs font-bold text-pink-400 tracking-wider">MBTI DIAGNOSIS</p>
+            <p className="mb-1 text-xs font-bold text-pink-400 tracking-wider">MBTI TYPE CHECK</p>
             <h2 className="mb-2 font-heading text-xl font-bold text-pink-600 md:text-2xl">
-              あなたに向いてるお仕事、診断してみない？
+              あなたのタイプに合う職種を知ってみない？
             </h2>
             <p className="mb-4 text-sm text-pink-900/60">
-              30秒のかんたん診断で、あなたのMBTIタイプにぴったりの高収入副業がわかるよ！
+              30秒のかんたん診断で、あなたのMBTIタイプに向いてる傾向がある職種タイプがわかるよ。
+              <br />
+              あくまで参考情報として楽しんでね。
             </p>
             <Link href="/shindan/mbti" className="btn-pink-gradient inline-block text-sm">
               無料で診断する
@@ -151,7 +155,7 @@ export default function HomePage() {
       <section className="bg-gradient-to-b from-white to-pink-50/50 py-16">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="section-title mb-10 text-2xl font-bold text-pink-600">
-            人気の条件で探す
+            条件別の業界ガイド
           </h2>
           <div className="flex flex-wrap justify-center gap-3">
             {CONDITIONS.map((c) => {
@@ -175,7 +179,7 @@ export default function HomePage() {
       <section className="py-16">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="section-title mb-10 text-2xl font-bold text-pink-600">
-            人気エリアから探す
+            エリア別ガイド
           </h2>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {POPULAR_AREAS.map((a) => (
@@ -196,17 +200,20 @@ export default function HomePage() {
       <section className="py-4">
         <div className="mx-auto max-w-6xl px-4">
           <NaviChanBanner position="left">
-            <p className="mb-1 text-xs font-bold text-pink-400 tracking-wider">LINE CONSULTATION</p>
+            <p className="mb-1 text-xs font-bold text-pink-400 tracking-wider">LINE Q&amp;A</p>
             <h2 className="mb-2 font-heading text-xl font-bold text-pink-600 md:text-2xl">
-              悩んでるなら、ナビちゃんに相談してね！
+              業界のギモン、編集部にきいてみない？
             </h2>
             <p className="mb-4 text-sm text-pink-900/60">
-              「どのお仕事が自分に合う？」「未経験でも大丈夫？」
+              「未経験だとどんな感じ？」「どの職種が人気？」
               <br />
-              なんでも気軽にLINEで聞いてね。無料だよ！
+              業界のリアルな情報をお伝えするよ。
+            </p>
+            <p className="mb-4 text-xs text-pink-400">
+              ※個別店舗のご紹介・お仕事の斡旋はしていません。参考情報としてお届けします。
             </p>
             <Link href="/line" className="inline-block rounded-full bg-[#06C755] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-green-200 hover:bg-[#05b04c]">
-              LINEで相談する
+              LINEでギモンを聞く
             </Link>
           </NaviChanBanner>
         </div>
@@ -223,12 +230,19 @@ export default function HomePage() {
               はじめまして、ナビちゃんです。
             </p>
             <p className="mt-3">
-              高収入のお仕事って「気になるけど不安...」という方が多いですよね。
-              ナビちゃんは、そんなあなたが<b>安心してお仕事を選べる</b>ように、
-              業界のリアルな情報を優しくお届けします。
+              高収入のお仕事って「気になるけど不安...」って方、多いよね。
             </p>
             <p className="mt-3">
-              まずはMBTI診断で、あなたに合ったお仕事タイプを調べてみませんか。
+              ナビちゃんは、あなたが<b>自分で納得して判断できる</b>ように、
+              業界のリアルな情報を優しくお届けするよ。
+            </p>
+            <p className="mt-3">
+              私たちはお仕事の紹介はしてないけど、
+              「知る」ことからお手伝いできたら嬉しいな。
+            </p>
+            <p className="mt-3">
+              まずは気軽にMBTI診断で、あなたのタイプに
+              合いやすい職種を見てみない？
             </p>
           </NaviChanMessage>
         </div>

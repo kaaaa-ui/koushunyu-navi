@@ -73,7 +73,7 @@ export function NaviChanMessage({
           <div className="text-sm font-bold text-pink-500">
             {label} <span className="text-gold">&#10022;</span>
           </div>
-          <div className="text-xs text-pink-400">あなたの副業ナビゲーター</div>
+          <div className="text-xs text-pink-400">あなたの情報ナビゲーター</div>
         </div>
       </div>
       <div className="text-sm leading-relaxed text-pink-900/70">{children}</div>
@@ -112,13 +112,13 @@ export function NaviChanFloat() {
         <div className="relative">
           {/* 吹き出し */}
           <div className="absolute -top-14 right-0 whitespace-nowrap rounded-full bg-white px-4 py-2 text-xs font-bold text-pink-500 shadow-lg border border-pink-200 opacity-0 group-hover:opacity-100 transition-opacity">
-            気軽に相談してね！
+            気軽に質問してね！
             <div className="absolute -bottom-1 right-6 h-2 w-2 rotate-45 bg-white border-b border-r border-pink-200" />
           </div>
           <div className="h-16 w-16 overflow-hidden rounded-full border-2 border-white shadow-xl shadow-pink-200/50 transition-transform group-hover:scale-110">
             <Image
               src="/navi-chan.png"
-              alt="ナビちゃんに相談"
+              alt="ナビちゃんに質問"
               width={64}
               height={64}
               className="h-full w-full object-cover"

@@ -32,8 +32,8 @@ export async function generateMetadata({
   const label = getConditionLabel(condition);
   if (!label) return {};
   return {
-    title: `【${label}】の高収入求人一覧｜エリア×職種で探す`,
-    description: `${label}の高収入求人をエリア・職種別に探せます。${CONDITION_DETAILS[condition]?.desc || ""}`,
+    title: `【${label}】の高収入バイト情報｜エリア×職種で解説`,
+    description: `${label}の高収入バイト情報をエリア・職種別に解説しています。${CONDITION_DETAILS[condition]?.desc || ""}`,
     alternates: { canonical: `https://koushunyu-navi.vercel.app/jobs/conditions/${condition}` },
   };
 }
@@ -71,7 +71,7 @@ export default async function ConditionLandingPage({
         </nav>
 
         <h1 className="section-title mb-2 text-2xl font-bold text-pink-600 md:text-3xl">
-          【{label}】の高収入求人
+          【{label}】の高収入バイト情報
         </h1>
         <p className="mb-4 text-center text-sm text-pink-900/60">
           {detail.desc}

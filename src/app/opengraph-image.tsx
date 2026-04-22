@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { NAVI_OGP_BASE64 } from "@/lib/navi-ogp-base64";
 
 export const runtime = "edge";
-export const alt = "高収入ナビ｜副業MAP";
+export const alt = "高収入ナビ｜高収入バイト情報メディア";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -73,7 +73,7 @@ export default async function Image() {
               letterSpacing: "0.15em",
             }}
           >
-            副業MAP
+            情報メディア
           </div>
           <div
             style={{
@@ -101,7 +101,7 @@ export default async function Image() {
               marginTop: 4,
             }}
           >
-            未経験OK・在宅OK・高収入のお仕事多数
+            業界のリアルをやさしく解説
           </div>
         </div>
       </div>

@@ -35,7 +35,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
   const resultUrlForLine = `${SITE_URL}/result/${result.code}?utm_source=line&utm_medium=social&utm_campaign=mbti_share`;
 
   const shareTextForX = encodeURIComponent(
-    `私の副業MBTIタイプは【${result.code}】${result.name}でした！\nおすすめ副業: ${result.job}（月収${result.salary}円）\n\n#副業MBTI診断 #高収入ナビ`
+    `私のMBTI職種タイプは【${result.code}】${result.name}でした！\n向いてる傾向がある職種: ${result.job}\n\n#MBTI職種タイプチェック #高収入ナビ`
   );
   const xShareUrl = `https://twitter.com/intent/tweet?text=${shareTextForX}&url=${encodeURIComponent(resultUrlForX)}`;
   const lineShareUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(resultUrlForLine)}`;
@@ -58,7 +58,7 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
         {/* タイプ名 */}
         <div className="mb-6 text-center">
           <div className="mb-2 inline-block rounded-full bg-gradient-to-r from-pink-400 to-pink-500 px-4 py-1 text-xs font-bold text-white">
-            あなたの副業タイプ
+            あなたの職種タイプ
           </div>
           <div className="mb-2 text-4xl">{result.emoji}</div>
           <h2 className="mb-1 font-heading text-2xl font-bold text-pink-600 md:text-3xl">
@@ -94,10 +94,10 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
           </div>
         </div>
 
-        {/* おすすめ副業 = チャットレディ */}
+        {/* 合いやすい職種 = チャットレディ */}
         <div className="mb-4 rounded-2xl bg-gradient-to-br from-yellow-50 to-pink-50 p-4 border border-yellow-200/50">
           <h3 className="mb-2 text-center text-sm font-bold text-pink-600">
-            あなたにぴったりの副業
+            あなたのタイプに合いやすい職種
           </h3>
           <div className="text-center">
             <span className="text-xl font-bold text-pink-700">
@@ -208,9 +208,9 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
             onClick={() => trackClick("line_click", "main_cta")}
             className="block w-full rounded-full bg-[#06C755] px-6 py-4 text-center font-bold text-white shadow-lg shadow-green-200 transition-transform hover:scale-105"
           >
-            <span className="text-base">LINEで稼ぎ方を詳しく聞く</span>
+            <span className="text-base">LINEで業界のギモンを聞く</span>
             <span className="mt-1 block text-xs font-normal opacity-80">
-              ナビちゃんが{result.code}タイプ専用のアドバイスをお届け
+              ナビちゃんが{result.code}タイプ向けの参考情報をお届け
             </span>
           </a>
           <a
@@ -224,9 +224,16 @@ export function QuizResult({ result, onRetry }: QuizResultProps) {
           </a>
         </div>
 
-        {/* 1回制限の注意書き */}
-        <div className="mt-6 text-center">
-          <p className="text-xs text-pink-400">
+        {/* 免責事項 */}
+        <div className="mt-6 rounded-xl bg-pink-50/50 p-4 text-center">
+          <p className="text-xs leading-relaxed text-pink-400">
+            ※この診断結果は、MBTIタイプ別の傾向を示す参考情報です。
+            <br />
+            実際の適性は個人差があり、お仕事選びはご自身の判断・責任で行ってください。
+            <br />
+            当サイトは特定の店舗・お仕事への斡旋は行っておりません。
+          </p>
+          <p className="mt-2 text-xs text-pink-400">
             診断は1人1回までです
           </p>
         </div>

@@ -15,13 +15,16 @@ export function QuizStart({ onStart }: QuizStartProps) {
         </div>
 
         <h1 className="mb-3 font-heading text-2xl font-bold text-pink-600 md:text-3xl">
-          副業MBTI診断
+          MBTI職種タイプチェック
         </h1>
 
         <p className="mb-2 text-sm leading-relaxed text-pink-900/60">
-          あなたの性格タイプから、
+          あなたのMBTIタイプから、
           <br />
-          ぴったりの高収入副業がわかる！
+          向いてる傾向がある職種タイプを参考情報としてご紹介します。
+        </p>
+        <p className="mb-2 text-xs text-pink-400">
+          ※あくまで傾向を示す参考情報です。実際のお仕事選びはご自身でご判断ください。
         </p>
 
         <div className="mb-6 flex items-center justify-center gap-2 text-xs text-pink-400">
