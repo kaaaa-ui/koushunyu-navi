@@ -139,7 +139,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                   </h3>
                   <p className="mb-3 text-sm text-pink-900/60">
                     {label}もいいけど、<b>チャットレディ</b>なら在宅OK・未経験OK・顔出しなしで始められるよ！
-                    自分のペースで高収入が目指せるから、初めての方にもぴったり。
+                    自分のペースで高収入が目指せるから、初めての方にもおすすめだよ。
                   </p>
                   <Link
                     href="/jobs/chatlady"
@@ -154,10 +154,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
           <NaviChanBanner position="left">
             <h3 className="mb-2 font-heading text-lg font-bold text-pink-600">
-              自分に合うお仕事がわからない？
+              業界のギモン、ナビちゃんに聞いてみない？
             </h3>
             <p className="mb-4 text-sm text-pink-900/60">
-              ナビちゃんにLINEで相談してね！MBTI診断もできるよ。
+              ナビちゃんにLINEで質問してね！MBTI診断もできるよ。
+            </p>
+            <p className="mb-4 text-xs text-pink-400">
+              ※業界の一般情報をご案内しています。個別の店舗紹介・お仕事の斡旋は行っておりません。
             </p>
             <div className="flex flex-wrap gap-3">
               <a
@@ -166,7 +169,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                 rel="noopener noreferrer"
                 className="inline-block rounded-full bg-[#06C755] px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-green-200 hover:bg-[#05b04c]"
               >
-                LINEで相談する
+                LINEで質問する
               </a>
               <Link
                 href="/shindan/mbti"

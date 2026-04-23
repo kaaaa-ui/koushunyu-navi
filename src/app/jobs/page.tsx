@@ -98,10 +98,13 @@ export default function JobsIndexPage() {
 
         <NaviChanBanner position="right">
           <h3 className="mb-2 font-heading text-lg font-bold text-pink-600">
-            自分に合うお仕事がわからない？
+            業界のギモン、ナビちゃんに聞いてみない？
           </h3>
           <p className="mb-4 text-sm text-pink-900/60">
             ナビちゃんにLINEで質問してね！MBTI診断もできるよ。
+          </p>
+          <p className="mb-4 text-xs text-pink-400">
+            ※業界の一般情報をご案内しています。個別の店舗紹介・お仕事の斡旋は行っておりません。
           </p>
           <div className="flex flex-wrap gap-3">
             <a

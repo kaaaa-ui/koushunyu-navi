@@ -80,6 +80,7 @@ const PILLAR_META: Record<
 };
 
 const PILLARS_DIR = path.join(process.cwd(), "src/content/pillars");
+const GUIDES_DIR = path.join(process.cwd(), "src/content/guides");
 
 // pillar_01-07: H1 + メタデータ行(「**カテゴリ**:」等) + 区切り「---」を除去し本文だけ返す
 function stripMetaBlock(raw: string): string {
@@ -107,17 +108,62 @@ function estimateWordCount(text: string): number {
   return text.replace(/\s/g, "").length;
 }
 
-export function getAllGuides(): Guide[] {
-  const files = fs.readdirSync(PILLARS_DIR).filter((f) => f.endsWith(".md") && f.startsWith("pillar_"));
-  return files.map((file) => parseGuideFile(file)).sort((a, b) => a.slug.localeCompare(b.slug));
+/** 再帰的にディレクトリ内の .mdx ファイルを収集 */
+function collectMdxFiles(dir: string): string[] {
+  if (!fs.existsSync(dir)) return [];
+  const results: string[] = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results.push(...collectMdxFiles(fullPath));
+    } else if (entry.name.endsWith(".mdx")) {
+      results.push(fullPath);
+    }
+  }
+  return results;
 }
 
-function parseGuideFile(filename: string): Guide {
+/** MDXファイルからGuideを生成（slugはディレクトリ構造から） */
+function parseMdxGuide(filePath: string): Guide {
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const { data, content } = matter(raw);
+
+  // slugはGUIDES_DIRからの相対パス（拡張子除去）
+  const relative = path.relative(GUIDES_DIR, filePath);
+  const slug = relative.replace(/\.mdx$/, "");
+
+  return {
+    slug,
+    title: (data.title as string) || "",
+    description: (data.description as string) || "",
+    category: (data.category as string) || "general",
+    publishedAt: (data.publishedAt as string) || "2026-04-22",
+    updatedAt: (data.updatedAt as string) || "2026-04-22",
+    readingTime: estimateReadingTime(content),
+    wordCount: estimateWordCount(content),
+    tags: (data.tags as string[]) || [],
+    content,
+  };
+}
+
+export function getAllGuides(): Guide[] {
+  // 1. 既存pillar記事
+  const pillarFiles = fs.readdirSync(PILLARS_DIR).filter((f) => f.endsWith(".md") && f.startsWith("pillar_"));
+  const pillarGuides = pillarFiles.map((file) => parsePillarFile(file));
+
+  // 2. 新規MDXガイド記事
+  const mdxFiles = collectMdxFiles(GUIDES_DIR);
+  const mdxGuides = mdxFiles.map((filePath) => parseMdxGuide(filePath));
+
+  return [...pillarGuides, ...mdxGuides].sort((a, b) => a.slug.localeCompare(b.slug));
+}
+
+function parsePillarFile(filename: string): Guide {
   const filePath = path.join(PILLARS_DIR, filename);
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
 
-  // frontmatterありの場合（pillar_08-10）
+  // frontmatterありの場合（pillar_08-13）
   if (data.slug) {
     return {
       slug: data.slug as string,

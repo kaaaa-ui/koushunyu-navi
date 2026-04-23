@@ -6,15 +6,16 @@ import { parseMarkdown } from "@/lib/markdown";
 import { NaviChanMessage } from "@/components/navi-chan";
 
 export async function generateStaticParams() {
-  return getAllGuides().map((g) => ({ slug: g.slug }));
+  return getAllGuides().map((g) => ({ slug: g.slug.split("/") }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug: slugParts } = await params;
+  const slug = slugParts.join("/");
   const guide = getGuideBySlug(slug);
   if (!guide) return {};
   return {
@@ -37,9 +38,10 @@ export async function generateMetadata({
 export default async function GuidePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }) {
-  const { slug } = await params;
+  const { slug: slugParts } = await params;
+  const slug = slugParts.join("/");
   const guide = getGuideBySlug(slug);
   if (!guide) notFound();
 

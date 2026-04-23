@@ -27,7 +27,7 @@ export const questions: Question[] = [
   },
   {
     id: 2,
-    question: "副業で一番大事なのは？",
+    question: "お仕事で一番大事なのは？",
     emoji: "💰",
     choices: [
       { text: "とにかく稼げること！", scores: { SN: 2 } },
@@ -45,7 +45,7 @@ export const questions: Question[] = [
   },
   {
     id: 4,
-    question: "気になる副業を見つけたら？",
+    question: "気になるお仕事を見つけたら？",
     emoji: "🚀",
     choices: [
       { text: "即行動！まずやってみる", scores: { TF: 2 } },
@@ -81,7 +81,7 @@ export const questions: Question[] = [
   },
   {
     id: 8,
-    question: "副業に使える時間は？",
+    question: "お仕事に使える時間は？",
     emoji: "⏰",
     choices: [
       { text: "週15時間以上いける！", scores: { JP: 2 } },
