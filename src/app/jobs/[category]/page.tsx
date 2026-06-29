@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getCategories, getCategoryLabel, getPrefecturesByCategory, getPrefectureLabel, CONDITION_LABELS, TOP_PREFECTURES } from "@/lib/jobs";
+import { getCategories, getCategoryLabel, getPrefecturesByCategory, getPrefectureLabel, CONDITION_LABELS, TOP_PREFECTURES, CATEGORY_INFO, CATEGORY_HOURLY } from "@/lib/jobs";
 import { NaviChan, NaviChanBanner } from "@/components/navi-chan";
 import { ExternalLink } from "lucide-react";
 
@@ -48,9 +48,44 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
     ],
   };
 
+  // 職種の定義・実データでFAQを自己完結化（AIに「○○とは」で引用されやすくする）
+  const info = CATEGORY_INFO[category];
+  const hourly = CATEGORY_HOURLY[category] ?? 3000;
+  const isZaitaku = info?.style === "在宅";
+
+  const faqItems: { q: string; a: string }[] = [
+    {
+      q: `${label}とは？`,
+      a: info?.summary ?? `${label}は、女性向けの高収入が期待できるお仕事のひとつです。`,
+    },
+    {
+      q: `${label}の時給・給料の相場は？`,
+      a: `${label}の平均時給はおよそ${hourly.toLocaleString()}円が目安です。時給はエリア・店舗・時間帯や指名・インセンティブによって変わり、都市部の繁華街ほど高めの傾向があります。`,
+    },
+    {
+      q: `${label}は未経験でも働ける？`,
+      a: `はい。${label}の求人の多くは未経験OKで、未経験からスタートする人が大半です。研修やマニュアル、先輩スタッフのサポートが整った店舗を選べば、初めてでも安心して始められます。`,
+    },
+    {
+      q: isZaitaku ? `${label}は在宅でできる？` : `${label}は在宅でできる？勤務場所は？`,
+      a: isZaitaku
+        ? `はい。${label}はスマホやPCとネット環境があれば、自宅から在宅で働けるのが大きな特徴です。通勤不要で、顔出しなしの求人も多くあります。`
+        : `${label}は店舗や指定場所で働くお仕事のため、基本的に在宅ではできません。完全在宅で働きたい場合は、チャットレディなど在宅対応の職種がおすすめです。`,
+    },
+  ];
+
+  const faqLd = {
+    "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: faqItems.map((f) => ({
+      "@type": "Question", name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <nav className="mb-4 text-sm text-pink-400">
           <Link href="/" className="hover:text-pink-500">Top</Link>
@@ -63,9 +98,15 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         <h1 className="section-title mb-2 text-2xl font-bold text-pink-600 md:text-3xl">
           {label}の求人｜全国エリアで探す
         </h1>
-        <p className="mb-10 text-center text-sm text-pink-900/60">
+        <p className="mb-6 text-center text-sm text-pink-900/60">
           {label}の求人をエリアから探してみてね
         </p>
+
+        {info?.summary && (
+          <p className="mb-10 rounded-2xl bg-white/70 px-5 py-4 text-sm leading-relaxed text-pink-900/70">
+            {info.summary}全国の{label}求人をエリア別・条件別に探せます。
+          </p>
+        )}
 
         {/* 地方別エリアグリッド */}
         {regions.map((region) => {
@@ -106,6 +147,30 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
             ))}
           </div>
         </div>
+
+        {/* よくある質問 - 画面表示（AI/検索に引用されやすい自己完結Q&A） */}
+        <section className="my-10">
+          <h2 className="section-title mb-5 text-xl font-bold text-pink-600">
+            {label}についてよくある質問
+          </h2>
+          <div className="space-y-3">
+            {faqItems.map((f) => (
+              <details
+                key={f.q}
+                className="group rounded-2xl border border-pink-100 bg-white px-5 py-4 open:shadow-sm"
+              >
+                <summary className="cursor-pointer list-none font-bold text-pink-700 marker:content-none">
+                  <span className="mr-2 text-pink-400">Q.</span>
+                  {f.q}
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-pink-900/70">
+                  <span className="mr-2 font-bold text-pink-400">A.</span>
+                  {f.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
 
         {/* CTA */}
         <div className="mt-12 space-y-6">

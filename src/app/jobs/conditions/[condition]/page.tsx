@@ -58,9 +58,34 @@ export default async function ConditionLandingPage({
     ],
   };
 
+  // 条件の特典データでFAQを自己完結化（AIに引用されやすくする）
+  const faqItems: { q: string; a: string }[] = [
+    {
+      q: `${label}の高収入バイトとは？`,
+      a: `${detail.desc} ${label}の主な特徴は「${detail.merit}」です。`,
+    },
+    {
+      q: `${label}で働くメリットは？`,
+      a: `${label}の主なメリットは「${detail.merit}」です。自分のライフスタイルに合わせて働きやすいのが魅力です。`,
+    },
+    {
+      q: `${label}のお仕事を選ぶときのポイントは？`,
+      a: detail.point,
+    },
+  ];
+
+  const faqLd = {
+    "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: faqItems.map((f) => ({
+      "@type": "Question", name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <nav className="mb-4 text-sm text-pink-400">
           <Link href="/" className="hover:text-pink-500">Top</Link>
@@ -134,6 +159,30 @@ export default async function ConditionLandingPage({
               </Link>
             ))}
         </div>
+
+        {/* よくある質問 - 画面表示（AI/検索に引用されやすい自己完結Q&A） */}
+        <section className="mt-12">
+          <h2 className="section-title mb-5 text-xl font-bold text-pink-600">
+            {label}の高収入バイトについてよくある質問
+          </h2>
+          <div className="space-y-3">
+            {faqItems.map((f) => (
+              <details
+                key={f.q}
+                className="group rounded-2xl border border-pink-100 bg-white px-5 py-4 open:shadow-sm"
+              >
+                <summary className="cursor-pointer list-none font-bold text-pink-700 marker:content-none">
+                  <span className="mr-2 text-pink-400">Q.</span>
+                  {f.q}
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-pink-900/70">
+                  <span className="mr-2 font-bold text-pink-400">A.</span>
+                  {f.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
 
         {/* CTA */}
         <div className="mt-12">
