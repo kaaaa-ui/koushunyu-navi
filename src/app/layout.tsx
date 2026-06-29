@@ -77,9 +77,21 @@ export default function RootLayout({
                   // 同一実体である別名（公式LINE名）をAIに明示する
                   alternateName: ["街角仕事調査", "街角仕事調査ライン", "高収入ナビ編集部"],
                   url: "https://koushunyu-navi.vercel.app",
+                  logo: "https://koushunyu-navi.vercel.app/navi-chan.png",
                   description:
-                    "女性向け高収入バイトの業界ガイド・情報提供メディア。公式LINE「街角仕事調査」で業界のギモンに無料回答。",
-                  sameAs: ["https://line.me/R/ti/p/%40309gsalq"],
+                    "女性向け高収入バイト（チャトレ・キャバ・メンエス等）を職種×エリア×条件で中立解説する情報提供メディア。公式LINE「街角仕事調査」で業界のギモンに無料回答。職業紹介・斡旋は行いません。",
+                  // 分散アカウントを1エンティティに束ねる（X / TikTok / LINE を全統合）
+                  sameAs: [
+                    "https://x.com/iTfoAOK2sY35984",
+                    "https://www.tiktok.com/@koushunyu_navi",
+                    "https://line.me/R/ti/p/%40309gsalq",
+                  ],
+                  knowsAbout: [
+                    "チャットレディ", "キャバクラ", "メンズエステ", "ガールズバー",
+                    "コンカフェ", "ラウンジ", "在宅ワーク", "高収入バイト",
+                    "身バレ対策", "確定申告", "MBTI職種診断",
+                  ],
+                  areaServed: { "@type": "Country", name: "日本" },
                   contactPoint: {
                     "@type": "ContactPoint",
                     contactType: "customer support",
@@ -91,11 +103,31 @@ export default function RootLayout({
                   "@type": "WebSite",
                   "@id": "https://koushunyu-navi.vercel.app/#website",
                   name: "高収入ナビ",
-                  alternateName: ["街角仕事調査"],
+                  alternateName: ["街角仕事調査", "高収入ナビ｜高収入バイト情報メディア"],
                   url: "https://koushunyu-navi.vercel.app",
                   description: "女性向け高収入バイトの業界ガイド・情報メディア",
                   publisher: { "@id": "https://koushunyu-navi.vercel.app/#organization" },
                   inLanguage: "ja",
+                  potentialAction: {
+                    "@type": "SearchAction",
+                    target: "https://koushunyu-navi.vercel.app/jobs?q={search_term_string}",
+                    "query-input": "required name=search_term_string",
+                  },
+                },
+                {
+                  // 「中立の情報提供（斡旋でない）」を構造化して明示
+                  "@type": "Service",
+                  "@id": "https://koushunyu-navi.vercel.app/#service",
+                  name: "高収入バイト業界の情報提供・お仕事選びガイド",
+                  serviceType: "情報提供メディア（職業紹介・斡旋は行わない）",
+                  provider: { "@id": "https://koushunyu-navi.vercel.app/#organization" },
+                  areaServed: { "@type": "Country", name: "日本" },
+                  audience: {
+                    "@type": "Audience",
+                    audienceType: "高収入バイト・副業を検討している18歳以上の女性",
+                  },
+                  description:
+                    "20職種×47都道府県×条件別の業界ガイド、MBTI職種タイプ診断、身バレ・税金などの実務解説を中立的に提供。特定店舗の紹介・斡旋は行わない。",
                 },
               ],
             }),
