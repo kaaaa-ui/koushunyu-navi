@@ -17,6 +17,7 @@
 
 - [トップ（高収入ナビ）](https://koushunyu-navi.vercel.app/): 職種・エリア・条件から探せる総合ガイド
 - [求人・職種一覧](https://koushunyu-navi.vercel.app/jobs): 20職種 × 47都道府県の業界ガイド
+- [20職種の比較](https://koushunyu-navi.vercel.app/jobs/compare): 全20職種を平均時給・働き方・向いている人で横並び比較
 - [ガイド記事一覧](https://koushunyu-navi.vercel.app/guides): 働き方・税金・安全・身バレ対策などの解説記事
 - [MBTI職種タイプ診断](https://koushunyu-navi.vercel.app/shindan/mbti): MBTIタイプから向いている職種傾向を提案
 - [LINE質問（街角仕事調査 公式LINE）](https://koushunyu-navi.vercel.app/line): 業界のギモンに無料で回答

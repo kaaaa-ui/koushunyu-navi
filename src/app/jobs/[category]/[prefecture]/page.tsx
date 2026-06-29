@@ -39,12 +39,17 @@ export default async function JobPrefecturePage({ params }: { params: Promise<{ 
   // 近隣エリアを5件表示
   const nearbyPrefs = otherPrefs.slice(0, 8);
 
-  const jobPostingLd = {
-    "@context": "https://schema.org", "@type": "JobPosting",
-    title: `${prefLabel}の${catLabel}`, description: job.description, datePosted: "2026-04-06",
-    employmentType: "PART_TIME",
-    hiringOrganization: { "@type": "Organization", name: "高収入ナビ", sameAs: "https://koushunyu-navi.vercel.app" },
-    jobLocation: { "@type": "Place", address: { "@type": "PostalAddress", addressRegion: prefLabel, addressCountry: "JP" } },
+  // 情報メディア(斡旋しない)の実態に合わせ、JobPosting→Articleに是正。
+  // JobPostingは「求人を出している」意味になり中立メディアの自己定義と矛盾するため不可。
+  const articleLd = {
+    "@context": "https://schema.org", "@type": "Article",
+    headline: `${prefLabel}の${catLabel}｜働き方・時給相場の業界ガイド`,
+    description: job.description,
+    inLanguage: "ja",
+    about: `${prefLabel}の${catLabel}`,
+    isPartOf: { "@id": "https://koushunyu-navi.vercel.app/#website" },
+    publisher: { "@id": "https://koushunyu-navi.vercel.app/#organization" },
+    mainEntityOfPage: `https://koushunyu-navi.vercel.app/jobs/${category}/${prefecture}`,
   };
 
   // 実データ（平均時給・県の特徴・主要エリア）でFAQの答えを自己完結・断定的にする。
@@ -99,7 +104,7 @@ export default async function JobPrefecturePage({ params }: { params: Promise<{ 
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <article className="mx-auto max-w-3xl px-4 py-8">

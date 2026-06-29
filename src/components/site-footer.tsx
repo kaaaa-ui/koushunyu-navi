@@ -82,6 +82,7 @@ export function SiteFooter() {
             <h3 className="mb-3 text-sm font-bold text-pink-600">コンテンツ</h3>
             <ul className="space-y-2 text-sm text-pink-900/60">
               <li><Link href="/guides" className="hover:text-pink-500">ガイド記事</Link></li>
+              <li><Link href="/jobs/compare" className="hover:text-pink-500">20職種を比較</Link></li>
               <li><Link href="/guides/chatre-home-guide" className="hover:text-pink-500">チャトレ在宅ガイド</Link></li>
               <li><Link href="/guides/mibare-manual" className="hover:text-pink-500">身バレ対策マニュアル</Link></li>
               <li><Link href="/shindan/mbti" className="hover:text-pink-500">MBTI診断</Link></li>

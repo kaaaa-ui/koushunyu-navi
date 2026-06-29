@@ -54,26 +54,17 @@ export default async function ConditionPage({
   const prefLabel = getPrefectureLabel(prefecture);
   const condLabel = getConditionLabel(condition);
 
-  const jobPostingLd = {
+  // 情報メディア(斡旋しない)の実態に合わせ JobPosting→Article に是正
+  const articleLd = {
     "@context": "https://schema.org",
-    "@type": "JobPosting",
-    title: `${prefLabel}の${catLabel}【${condLabel}】`,
+    "@type": "Article",
+    headline: `${prefLabel}の${catLabel}【${condLabel}】｜業界ガイド`,
     description: page.description,
-    datePosted: "2026-04-06",
-    employmentType: "PART_TIME",
-    hiringOrganization: {
-      "@type": "Organization",
-      name: "高収入ナビ",
-      sameAs: "https://koushunyu-navi.vercel.app",
-    },
-    jobLocation: {
-      "@type": "Place",
-      address: {
-        "@type": "PostalAddress",
-        addressRegion: prefLabel,
-        addressCountry: "JP",
-      },
-    },
+    inLanguage: "ja",
+    about: `${prefLabel}の${catLabel}（${condLabel}）`,
+    isPartOf: { "@id": "https://koushunyu-navi.vercel.app/#website" },
+    publisher: { "@id": "https://koushunyu-navi.vercel.app/#organization" },
+    mainEntityOfPage: `https://koushunyu-navi.vercel.app/jobs/${category}/${prefecture}/${condition}`,
   };
 
   const breadcrumbLd = {
@@ -122,7 +113,7 @@ export default async function ConditionPage({
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <article className="mx-auto max-w-3xl px-4 py-8">
