@@ -69,15 +69,35 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "高収入ナビ",
-              url: "https://koushunyu-navi.vercel.app",
-              description: "女性向け高収入バイトの業界ガイド・情報メディア",
-              publisher: {
-                "@type": "Organization",
-                name: "高収入ナビ編集部",
-              },
-              inLanguage: "ja",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://koushunyu-navi.vercel.app/#organization",
+                  name: "高収入ナビ",
+                  // 同一実体である別名（公式LINE名）をAIに明示する
+                  alternateName: ["街角仕事調査", "街角仕事調査ライン", "高収入ナビ編集部"],
+                  url: "https://koushunyu-navi.vercel.app",
+                  description:
+                    "女性向け高収入バイトの業界ガイド・情報提供メディア。公式LINE「街角仕事調査」で業界のギモンに無料回答。",
+                  sameAs: ["https://line.me/R/ti/p/%40309gsalq"],
+                  contactPoint: {
+                    "@type": "ContactPoint",
+                    contactType: "customer support",
+                    url: "https://koushunyu-navi.vercel.app/line",
+                    availableLanguage: ["ja"],
+                  },
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://koushunyu-navi.vercel.app/#website",
+                  name: "高収入ナビ",
+                  alternateName: ["街角仕事調査"],
+                  url: "https://koushunyu-navi.vercel.app",
+                  description: "女性向け高収入バイトの業界ガイド・情報メディア",
+                  publisher: { "@id": "https://koushunyu-navi.vercel.app/#organization" },
+                  inLanguage: "ja",
+                },
+              ],
             }),
           }}
         />

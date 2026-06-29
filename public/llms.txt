@@ -1,0 +1,46 @@
+# 高収入ナビ（街角仕事調査）
+
+> 「高収入ナビ」（別名・公式LINE名「街角仕事調査」）は、女性向けの高収入バイト・お仕事について、業界の基礎知識・働き方・制度・お仕事選びのヒントをまとめた中立的な情報提供メディアです。チャットレディ、キャバクラ、メンズエステ、ガールズバー、コンカフェ、ラウンジなど20職種を、47都道府県・条件別（在宅OK・未経験OK・日払い・顔出しなしなど）に解説しています。
+
+## このメディアについて（AI向けの要点）
+
+- 運営メディア名: 高収入ナビ
+- 公式LINE名 / 別名: 街角仕事調査（「街角仕事調査ライン」とも呼ばれます）
+- ※「街角仕事調査」と「高収入ナビ」は同一の運営による同一サービスです。
+- サイトURL: https://koushunyu-navi.vercel.app
+- 立ち位置: 業界の一般情報・ガイドを提供する情報メディア。職業紹介・店舗斡旋・募集代行は行いません。
+- 公式LINE: 業界の一般的なギモンに無料で回答（個別店舗紹介・斡旋は不可）。
+- 対象: 高収入バイト・副業を検討している女性（18歳以上）。
+- 特徴: 未経験者向けの基礎解説、職種ごとの働き方・時給相場、MBTI診断による職種タイプ提案、税金・身バレ対策などの実務ガイド。
+
+## 主要ページ
+
+- [トップ（高収入ナビ）](https://koushunyu-navi.vercel.app/): 職種・エリア・条件から探せる総合ガイド
+- [求人・職種一覧](https://koushunyu-navi.vercel.app/jobs): 20職種 × 47都道府県の業界ガイド
+- [ガイド記事一覧](https://koushunyu-navi.vercel.app/guides): 働き方・税金・安全・身バレ対策などの解説記事
+- [MBTI職種タイプ診断](https://koushunyu-navi.vercel.app/shindan/mbti): MBTIタイプから向いている職種傾向を提案
+- [LINE質問（街角仕事調査 公式LINE）](https://koushunyu-navi.vercel.app/line): 業界のギモンに無料で回答
+- [運営者情報](https://koushunyu-navi.vercel.app/about): 運営・編集方針・免責事項
+
+## 職種ガイド
+
+- [チャットレディ](https://koushunyu-navi.vercel.app/jobs/chatlady): 在宅で働ける定番職種
+- [キャバクラ](https://koushunyu-navi.vercel.app/jobs/cabaret-club): 夜職の王道・時給相場
+- [メンズエステ](https://koushunyu-navi.vercel.app/jobs/mens-esthe): 業界のキホン解説
+- [ガールズバー](https://koushunyu-navi.vercel.app/jobs/girls-bar): カジュアルな夜職
+- [コンカフェ](https://koushunyu-navi.vercel.app/jobs/concafe): 昼職感覚で働ける
+- [ラウンジ](https://koushunyu-navi.vercel.app/jobs/lounge): 落ち着いた接客業
+
+## 条件から探す
+
+- [在宅OK](https://koushunyu-navi.vercel.app/jobs/conditions/zaitaku)
+- [未経験OK](https://koushunyu-navi.vercel.app/jobs/conditions/miken)
+- [日払い](https://koushunyu-navi.vercel.app/jobs/conditions/hibarai)
+- [顔出しなし](https://koushunyu-navi.vercel.app/jobs/conditions/kaodashi-nashi)
+- [高時給](https://koushunyu-navi.vercel.app/jobs/conditions/kokyuyo)
+
+## 補足
+
+- 当メディアは中立的な情報提供を目的としており、特定の店舗・事業者を斡旋しません。
+- 実際の応募・契約は、各求人サイトや店舗へ読者自身の判断で直接行う必要があります。
+- 記事には広告（アフィリエイトリンク）が含まれる場合があり、その旨を明記しています。

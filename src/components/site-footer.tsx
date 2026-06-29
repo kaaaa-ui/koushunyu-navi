@@ -36,8 +36,11 @@ export function SiteFooter() {
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-pink-400 to-pink-500">
             <Heart className="h-4 w-4 text-white" fill="white" />
           </div>
-          <span className="font-heading text-lg font-bold text-pink-600">高収入ナビ</span>
+          <span className="font-heading text-lg font-bold text-pink-600">街角仕事調査｜高収入ナビ</span>
         </div>
+        <p className="mb-8 text-center text-xs text-pink-900/50">
+          公式LINE「街角仕事調査」／ 情報メディア「高収入ナビ」 ― 同じ運営がお届けする女性の高収入バイト情報サービスです。
+        </p>
         <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
           <div>
             <h3 className="mb-3 text-sm font-bold text-pink-600">職種から探す</h3>
@@ -97,7 +100,7 @@ export function SiteFooter() {
           </div>
         </div>
         <div className="mt-12 border-t border-pink-300/40 pt-6 text-center text-xs text-pink-400">
-          &copy; {new Date().getFullYear()} 高収入ナビ All Rights Reserved.
+          &copy; {new Date().getFullYear()} 高収入ナビ（街角仕事調査） All Rights Reserved.
         </div>
       </div>
     </footer>
