@@ -8,7 +8,10 @@ import {
   getPrefectureLabel,
   getConditionLabel,
   CONDITION_LABELS,
+  CONDITION_DETAILS,
   CATEGORY_LABELS,
+  CATEGORY_HOURLY,
+  PREFECTURE_DATA,
   TOP_PREFECTURES,
 } from "@/lib/jobs";
 import { parseMarkdown } from "@/lib/markdown";
@@ -85,12 +88,42 @@ export default async function ConditionPage({
     ],
   };
 
+  // 実データ＋条件特典でFAQを自己完結・断定的にする（AIに引用されやすくする）
+  const hourly = CATEGORY_HOURLY[category] ?? 3000;
+  const prefData = PREFECTURE_DATA[prefecture];
+  const stations = prefData?.stations ?? prefLabel;
+  const cd = CONDITION_DETAILS[condition];
+
+  const faqItems: { q: string; a: string }[] = [
+    {
+      q: `${prefLabel}で「${condLabel}」の${catLabel}求人はある？`,
+      a: `はい。${prefLabel}には${condLabel}に対応した${catLabel}求人があります。${condLabel}の主な特徴は「${cd?.merit ?? "条件に合った働き方ができること"}」です。`,
+    },
+    {
+      q: `${prefLabel}の${catLabel}（${condLabel}）の時給相場は？`,
+      a: `${prefLabel}の${catLabel}の平均時給はおよそ${hourly.toLocaleString()}円が目安です。時給は店舗・時間帯・指名やインセンティブで変わり、${stations}など繁華街の店舗は高めの傾向があります。`,
+    },
+    {
+      q: `${condLabel}の${catLabel}で働くときのポイントは？`,
+      a: `${cd?.desc ?? `${condLabel}の条件に合う店舗を選ぶのがポイントです。`} ${cd?.point ?? ""}`.trim(),
+    },
+  ];
+
+  const faqLd = {
+    "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: faqItems.map((f) => ({
+      "@type": "Question", name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   // 他の条件へのリンク
   const otherConditions = Object.entries(CONDITION_LABELS).filter(([k]) => k !== condition);
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <article className="mx-auto max-w-3xl px-4 py-8">
         <nav className="mb-4 text-sm text-pink-400">
@@ -108,6 +141,30 @@ export default async function ConditionPage({
         <div className="prose-editorial max-w-none">
           <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         </div>
+
+        {/* よくある質問 - 画面表示（AI/検索に引用されやすい自己完結Q&A） */}
+        <section className="my-10">
+          <h2 className="mb-5 font-heading text-xl font-bold text-pink-600">
+            {prefLabel}の{condLabel}{catLabel}についてよくある質問
+          </h2>
+          <div className="space-y-3">
+            {faqItems.map((f) => (
+              <details
+                key={f.q}
+                className="group rounded-2xl border border-pink-100 bg-white px-5 py-4 open:shadow-sm"
+              >
+                <summary className="cursor-pointer list-none font-bold text-pink-700 marker:content-none">
+                  <span className="mr-2 text-pink-400">Q.</span>
+                  {f.q}
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-pink-900/70">
+                  <span className="mr-2 font-bold text-pink-400">A.</span>
+                  {f.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
 
         {/* 他の条件で探す */}
         <div className="my-8">

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getAllJobPages, getJobPage, getCategoryLabel, getPrefectureLabel, CONDITION_LABELS, TOP_PREFECTURES, getPrefecturesByCategory } from "@/lib/jobs";
+import { getAllJobPages, getJobPage, getCategoryLabel, getPrefectureLabel, CONDITION_LABELS, TOP_PREFECTURES, getPrefecturesByCategory, CATEGORY_HOURLY, PREFECTURE_DATA } from "@/lib/jobs";
 import { parseMarkdown } from "@/lib/markdown";
 import { NaviChan, NaviChanBanner } from "@/components/navi-chan";
 import { ExternalLink } from "lucide-react";
@@ -47,13 +47,44 @@ export default async function JobPrefecturePage({ params }: { params: Promise<{ 
     jobLocation: { "@type": "Place", address: { "@type": "PostalAddress", addressRegion: prefLabel, addressCountry: "JP" } },
   };
 
+  // 実データ（平均時給・県の特徴・主要エリア）でFAQの答えを自己完結・断定的にする。
+  // AIは「ページ内を見て」のような非回答を引用しないため、答えだけで完結させる。
+  const hourly = CATEGORY_HOURLY[category] ?? 3000;
+  const prefData = PREFECTURE_DATA[prefecture];
+  const stations = prefData?.stations ?? prefLabel;
+  const trait = prefData?.trait ?? "";
+  const isChatlady = category === "chatlady";
+
+  // 表示とJSON-LDの単一ソース
+  const faqItems: { q: string; a: string }[] = [
+    {
+      q: `${prefLabel}の${catLabel}は未経験でも働ける？`,
+      a: `はい。${prefLabel}の${catLabel}求人の多くは未経験OKで、未経験からスタートする人が大半です。特別な資格や経験は不要で、初日からの研修・マニュアル・先輩スタッフのサポートが整った店舗を選べば、接客が初めてでも安心して始められます。`,
+    },
+    {
+      q: `${prefLabel}の${catLabel}の時給・給料の相場は？`,
+      a: `${prefLabel}の${catLabel}の平均時給はおよそ${hourly.toLocaleString()}円が目安です。${trait ? `${prefLabel}は${trait}。` : ""}時給は店舗・時間帯・指名やインセンティブによって変わり、${stations}など繁華街の店舗は高めの傾向があります。`,
+    },
+    {
+      q: isChatlady
+        ? `${prefLabel}でチャットレディは在宅でできる？`
+        : `${prefLabel}で${catLabel}は在宅でできる？通勤事情は？`,
+      a: isChatlady
+        ? `はい。チャットレディはスマホやPCとネット環境があれば、自宅から完全在宅で働ける代表的なお仕事です。${prefLabel}在住でも通勤不要で、好きな時間に始められ、顔出しなしで働ける求人も多くあります。`
+        : `${catLabel}は店舗で働くお仕事のため基本は通勤が必要です。${prefLabel}では${stations}エリアに求人が集中しており、通いやすい店舗を選べます。完全在宅で働きたい場合は、チャットレディなど在宅対応の職種がおすすめです。`,
+    },
+    {
+      q: `${prefLabel}の${catLabel}は顔出しなし・身バレ対策できる？`,
+      a: `はい。${prefLabel}の${catLabel}には、顔出しなし・マスクやウィッグOKなど身バレ対策に配慮した働き方ができる求人があります。プライバシーを重視する場合は、顔出し不要の条件で探すのがおすすめです。`,
+    },
+  ];
+
   const faqLd = {
     "@context": "https://schema.org", "@type": "FAQPage",
-    mainEntity: [
-      { "@type": "Question", name: `${prefLabel}の${catLabel}は未経験でも大丈夫？`, acceptedAnswer: { "@type": "Answer", text: `はい、${prefLabel}の${catLabel}求人の多くは未経験OKです。研修やサポート体制が整った店舗を選ぶのがおすすめです。` } },
-      { "@type": "Question", name: `${prefLabel}の${catLabel}の時給相場は？`, acceptedAnswer: { "@type": "Answer", text: `${prefLabel}の${catLabel}の時給はエリアや店舗により異なりますが、詳しくはページ内の相場データをご確認ください。` } },
-      { "@type": "Question", name: `${prefLabel}で${catLabel}の在宅求人はある？`, acceptedAnswer: { "@type": "Answer", text: `${catLabel}の在宅対応状況はお仕事の種類により異なります。チャットレディは完全在宅対応の求人が多数あります。` } },
-    ],
+    mainEntity: faqItems.map((f) => ({
+      "@type": "Question", name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   };
 
   const breadcrumbLd = {
@@ -85,6 +116,30 @@ export default async function JobPrefecturePage({ params }: { params: Promise<{ 
         <div className="prose-editorial max-w-none">
           <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         </div>
+
+        {/* よくある質問 - 画面表示（AI/検索エンジンに引用されやすい自己完結Q&A） */}
+        <section className="my-10">
+          <h2 className="mb-5 font-heading text-xl font-bold text-pink-600">
+            {prefLabel}の{catLabel}についてよくある質問
+          </h2>
+          <div className="space-y-3">
+            {faqItems.map((f) => (
+              <details
+                key={f.q}
+                className="group rounded-2xl border border-pink-100 bg-white px-5 py-4 open:shadow-sm"
+              >
+                <summary className="cursor-pointer list-none font-bold text-pink-700 marker:content-none">
+                  <span className="mr-2 text-pink-400">Q.</span>
+                  {f.q}
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-pink-900/70">
+                  <span className="mr-2 font-bold text-pink-400">A.</span>
+                  {f.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
 
         {/* 条件で絞り込む - 内部リンクエンジン */}
         {isTopPref && (
